@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "analytics": {
+      "graphqlrealtimerace": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

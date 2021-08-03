@@ -123,6 +123,29 @@
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
+    },
+    "pinpointInterface": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "graphqlrealtimerace",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        },
+        {
+          "category": "analytics",
+          "resourceName": "graphqlrealtimerace",
+          "attributes": [
+            "Id",
+            "Region"
+          ]
+        }
+      ]
     }
   },
   "analytics": {
