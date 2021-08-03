@@ -47,5 +47,23 @@
       "service": "DynamoDB",
       "providerPlugin": "awscloudformation"
     }
+  },
+  "function": {
+    "raceResultsResolver": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "storage",
+          "resourceName": "raceresults",
+          "attributes": [
+            "Name",
+            "Arn",
+            "StreamArn"
+          ]
+        }
+      ]
+    }
   }
 }

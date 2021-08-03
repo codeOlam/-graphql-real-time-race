@@ -28,6 +28,58 @@ type Race {
   Circuit: AWSJSON
 }
 
+type Result {
+  Constructor: Constructor
+  Driver: Driver
+  FastestLap: Lap
+  driverId: String
+  grid: String
+  laps: String
+  number: String
+  PK: String
+  points: String
+  position: String
+  positionText: String
+  round: Int
+  SK: String
+  status: String
+}
+
+type Constructor {
+  constructorId: String
+  name: String
+  nationality: String
+  url: String
+}
+
+type Driver {
+  code: String
+  dateOfBirth: String
+  driverId: String
+  familyName: String
+  givenName: String
+  nationality: String
+  permanentNumber: String
+  url: String
+}
+
+type Lap {
+  AverageSpeed: Speed
+  lap: String
+  rank: String
+  Time: LapTime
+}
+
+type Speed {
+  speed: String
+  units: String
+}
+
+type LapTime {
+  time: String
+}
+
 type Query {
   getRaces: [Race]
+  getResults(driverId: String!): [Result]
 }

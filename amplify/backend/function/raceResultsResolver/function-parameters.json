@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "storage": {
+      "raceresults": [
+        "read"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
