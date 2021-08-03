@@ -237,7 +237,278 @@ export const schema = {
                     "attributes": []
                 }
             }
+        },
+        "Result": {
+            "name": "Result",
+            "fields": {
+                "Constructor": {
+                    "name": "Constructor",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "Constructor"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Driver": {
+                    "name": "Driver",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "Driver"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "FastestLap": {
+                    "name": "FastestLap",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "Lap"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "driverId": {
+                    "name": "driverId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "grid": {
+                    "name": "grid",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "laps": {
+                    "name": "laps",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "number": {
+                    "name": "number",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "PK": {
+                    "name": "PK",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "points": {
+                    "name": "points",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "position": {
+                    "name": "position",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "positionText": {
+                    "name": "positionText",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "round": {
+                    "name": "round",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "SK": {
+                    "name": "SK",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "Constructor": {
+            "name": "Constructor",
+            "fields": {
+                "constructorId": {
+                    "name": "constructorId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "nationality": {
+                    "name": "nationality",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "Driver": {
+            "name": "Driver",
+            "fields": {
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "dateOfBirth": {
+                    "name": "dateOfBirth",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "driverId": {
+                    "name": "driverId",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "familyName": {
+                    "name": "familyName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "givenName": {
+                    "name": "givenName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "nationality": {
+                    "name": "nationality",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "permanentNumber": {
+                    "name": "permanentNumber",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "Lap": {
+            "name": "Lap",
+            "fields": {
+                "AverageSpeed": {
+                    "name": "AverageSpeed",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "Speed"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "lap": {
+                    "name": "lap",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "rank": {
+                    "name": "rank",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Time": {
+                    "name": "Time",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "LapTime"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "Speed": {
+            "name": "Speed",
+            "fields": {
+                "speed": {
+                    "name": "speed",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "units": {
+                    "name": "units",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "LapTime": {
+            "name": "LapTime",
+            "fields": {
+                "time": {
+                    "name": "time",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
         }
     },
-    "version": "acabd7b403d148ab6131349b9b8dd915"
+    "version": "42313a9585eaf6f87febcd09e8becfbc"
 };

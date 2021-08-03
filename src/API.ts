@@ -159,6 +159,63 @@ export type Race = {
   Circuit?: string | null,
 };
 
+export type Result = {
+  __typename: "Result",
+  Constructor?: Constructor | null,
+  Driver?: Driver | null,
+  FastestLap?: Lap | null,
+  driverId?: string | null,
+  grid?: string | null,
+  laps?: string | null,
+  number?: string | null,
+  PK?: string | null,
+  points?: string | null,
+  position?: string | null,
+  positionText?: string | null,
+  round?: number | null,
+  SK?: string | null,
+  status?: string | null,
+};
+
+export type Constructor = {
+  __typename: "Constructor",
+  constructorId?: string | null,
+  name?: string | null,
+  nationality?: string | null,
+  url?: string | null,
+};
+
+export type Driver = {
+  __typename: "Driver",
+  code?: string | null,
+  dateOfBirth?: string | null,
+  driverId?: string | null,
+  familyName?: string | null,
+  givenName?: string | null,
+  nationality?: string | null,
+  permanentNumber?: string | null,
+  url?: string | null,
+};
+
+export type Lap = {
+  __typename: "Lap",
+  AverageSpeed?: Speed | null,
+  lap?: string | null,
+  rank?: string | null,
+  Time?: LapTime | null,
+};
+
+export type Speed = {
+  __typename: "Speed",
+  speed?: string | null,
+  units?: string | null,
+};
+
+export type LapTime = {
+  __typename: "LapTime",
+  time?: string | null,
+};
+
 export type ModelStarredEventFilterInput = {
   id?: ModelIDInput | null,
   owner?: ModelStringInput | null,
@@ -390,6 +447,50 @@ export type GetRacesQuery = {
     time?: string | null,
     url?: string | null,
     Circuit?: string | null,
+  } | null > | null,
+};
+
+export type GetResultsQueryVariables = {
+  driverId: string,
+};
+
+export type GetResultsQuery = {
+  getResults?:  Array< {
+    __typename: "Result",
+    Constructor?:  {
+      __typename: "Constructor",
+      constructorId?: string | null,
+      name?: string | null,
+      nationality?: string | null,
+      url?: string | null,
+    } | null,
+    Driver?:  {
+      __typename: "Driver",
+      code?: string | null,
+      dateOfBirth?: string | null,
+      driverId?: string | null,
+      familyName?: string | null,
+      givenName?: string | null,
+      nationality?: string | null,
+      permanentNumber?: string | null,
+      url?: string | null,
+    } | null,
+    FastestLap?:  {
+      __typename: "Lap",
+      lap?: string | null,
+      rank?: string | null,
+    } | null,
+    driverId?: string | null,
+    grid?: string | null,
+    laps?: string | null,
+    number?: string | null,
+    PK?: string | null,
+    points?: string | null,
+    position?: string | null,
+    positionText?: string | null,
+    round?: number | null,
+    SK?: string | null,
+    status?: string | null,
   } | null > | null,
 };
 

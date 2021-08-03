@@ -15,6 +15,63 @@ export declare class Race {
   constructor(init: ModelInit<Race>);
 }
 
+export declare class Result {
+  readonly Constructor?: Constructor;
+  readonly Driver?: Driver;
+  readonly FastestLap?: Lap;
+  readonly driverId?: string;
+  readonly grid?: string;
+  readonly laps?: string;
+  readonly number?: string;
+  readonly PK?: string;
+  readonly points?: string;
+  readonly position?: string;
+  readonly positionText?: string;
+  readonly round?: number;
+  readonly SK?: string;
+  readonly status?: string;
+  constructor(init: ModelInit<Result>);
+}
+
+export declare class Constructor {
+  readonly constructorId?: string;
+  readonly name?: string;
+  readonly nationality?: string;
+  readonly url?: string;
+  constructor(init: ModelInit<Constructor>);
+}
+
+export declare class Driver {
+  readonly code?: string;
+  readonly dateOfBirth?: string;
+  readonly driverId?: string;
+  readonly familyName?: string;
+  readonly givenName?: string;
+  readonly nationality?: string;
+  readonly permanentNumber?: string;
+  readonly url?: string;
+  constructor(init: ModelInit<Driver>);
+}
+
+export declare class Lap {
+  readonly AverageSpeed?: Speed;
+  readonly lap?: string;
+  readonly rank?: string;
+  readonly Time?: LapTime;
+  constructor(init: ModelInit<Lap>);
+}
+
+export declare class Speed {
+  readonly speed?: string;
+  readonly units?: string;
+  constructor(init: ModelInit<Speed>);
+}
+
+export declare class LapTime {
+  readonly time?: string;
+  constructor(init: ModelInit<LapTime>);
+}
+
 type StarredEventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
