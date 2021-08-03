@@ -84,3 +84,20 @@ type Query {
   getResults(driverId: String!): [Result]
   getResults2(driverId: String!): [Result]
 }
+
+type LocationEvent
+  @model
+  @auth(
+    rules: [
+      { allow: private, provider: iam, operations: [read, create] }
+      { allow: private }
+    ]
+  ) {
+  id: ID!
+  type: String
+  geofenceId: String
+  deviceId: String
+  sampleTime: String
+  longitude: Float
+  latitude: Float
+}
