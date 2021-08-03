@@ -43,7 +43,7 @@ ${text}
 
 var charset = 'UTF-8'
 const subject = 'GRAPHQL REAL-TIME RACE WORKSHOP - Notification'
-const address = '<your-email-address>'
+const address = 'projectdev24@gmail.com'
 exports.handler = async (event) => {
   console.log(` received event >`, JSON.stringify(event, null, 2))
 
