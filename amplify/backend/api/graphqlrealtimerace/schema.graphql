@@ -82,4 +82,5 @@ type LapTime {
 type Query {
   getRaces: [Race]
   getResults(driverId: String!): [Result]
+  getResults2(driverId: String!): [Result]
 }
