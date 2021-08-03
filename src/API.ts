@@ -1438,6 +1438,52 @@ export type SyncMessagesQuery = {
   } | null,
 };
 
+export type OnMutateMessageSubscriptionVariables = {
+  eventId?: string | null,
+};
+
+export type OnMutateMessageSubscription = {
+  onMutateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
 export type OnCreateStarredEventSubscriptionVariables = {
   owner?: string | null,
 };

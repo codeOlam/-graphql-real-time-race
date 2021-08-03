@@ -2,6 +2,45 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onMutateMessage = /* GraphQL */ `
+  subscription OnMutateMessage($eventId: ID) {
+    onMutateMessage(eventId: $eventId) {
+      id
+      owner
+      content
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
 export const onCreateStarredEvent = /* GraphQL */ `
   subscription OnCreateStarredEvent($owner: String) {
     onCreateStarredEvent(owner: $owner) {

@@ -132,3 +132,8 @@ type S3Object {
   key: String!
   region: String!
 }
+
+type Subscription {
+  onMutateMessage(eventId: ID): Message
+    @aws_subscribe(mutations: ["createMessage", "updateMessage"])
+}

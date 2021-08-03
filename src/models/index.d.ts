@@ -79,11 +79,15 @@ export declare class S3Object {
   constructor(init: ModelInit<S3Object>);
 }
 
-type StarredEventMetaData = {
-  readOnlyFields: 'createdAt' | 'updatedAt';
+type MessageMetaData = {
+  readOnlyFields;
 }
 
 type EventMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+type StarredEventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
@@ -91,18 +95,18 @@ type LocationEventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-type MessageMetaData = {
-  readOnlyFields;
-}
-
-export declare class StarredEvent {
+export declare class Message {
   readonly id: string;
   readonly owner?: string;
-  readonly Event?: Event;
-  readonly createdAt?: string;
-  readonly updatedAt?: string;
-  constructor(init: ModelInit<StarredEvent, StarredEventMetaData>);
-  static copyOf(source: StarredEvent, mutator: (draft: MutableModel<StarredEvent, StarredEventMetaData>) => MutableModel<StarredEvent, StarredEventMetaData> | void): StarredEvent;
+  readonly content: string;
+  readonly event?: Event;
+  readonly eventId?: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly original?: S3Object;
+  readonly thumbnail?: S3Object;
+  constructor(init: ModelInit<Message>);
+  static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
 }
 
 export declare class Event {
@@ -119,6 +123,16 @@ export declare class Event {
   static copyOf(source: Event, mutator: (draft: MutableModel<Event, EventMetaData>) => MutableModel<Event, EventMetaData> | void): Event;
 }
 
+export declare class StarredEvent {
+  readonly id: string;
+  readonly owner?: string;
+  readonly Event?: Event;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<StarredEvent, StarredEventMetaData>);
+  static copyOf(source: StarredEvent, mutator: (draft: MutableModel<StarredEvent, StarredEventMetaData>) => MutableModel<StarredEvent, StarredEventMetaData> | void): StarredEvent;
+}
+
 export declare class LocationEvent {
   readonly id: string;
   readonly type?: string;
@@ -131,18 +145,4 @@ export declare class LocationEvent {
   readonly updatedAt?: string;
   constructor(init: ModelInit<LocationEvent, LocationEventMetaData>);
   static copyOf(source: LocationEvent, mutator: (draft: MutableModel<LocationEvent, LocationEventMetaData>) => MutableModel<LocationEvent, LocationEventMetaData> | void): LocationEvent;
-}
-
-export declare class Message {
-  readonly id: string;
-  readonly owner?: string;
-  readonly content: string;
-  readonly event?: Event;
-  readonly eventId?: string;
-  readonly createdAt: string;
-  readonly updatedAt: string;
-  readonly original?: S3Object;
-  readonly thumbnail?: S3Object;
-  constructor(init: ModelInit<Message>);
-  static copyOf(source: Message, mutator: (draft: MutableModel<Message>) => MutableModel<Message> | void): Message;
 }
