@@ -1,6 +1,6 @@
 {
     "identityPoolName": "testAuthIdentityPool",
-    "allowUnauthenticatedIdentities": false,
+    "allowUnauthenticatedIdentities": true,
     "resourceNameTruncated": "graphq7428cbe0",
     "userPoolName": "graphqlrealtimerace",
     "autoVerifiedAttributes": [
@@ -21,13 +21,13 @@
         "preferred_username",
         "email"
     ],
-    "aliasAttributes": [],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
     "userpoolClientLambdaRole": "graphq7428cbe0_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
+    "aliasAttributes": [],
     "sharedId": "7428cbe0",
     "resourceName": "graphqlrealtimerace",
     "authSelections": "identityPoolAndUserPool",

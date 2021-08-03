@@ -1,0 +1,21 @@
+{
+    "appName": "graphqlrealtimerace",
+    "roleName": "pinpointLambdaRolea2affe09",
+    "cloudformationPolicyName": "cloudformationPolicya2affe09",
+    "cloudWatchPolicyName": "cloudWatchPolicya2affe09",
+    "pinpointPolicyName": "pinpointPolicya2affe09",
+    "authPolicyName": "pinpoint_amplify_a2affe09",
+    "unauthPolicyName": "pinpoint_amplify_a2affe09",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

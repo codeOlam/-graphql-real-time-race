@@ -124,5 +124,11 @@
       "service": "LambdaLayer",
       "build": true
     }
+  },
+  "analytics": {
+    "graphqlrealtimerace": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
