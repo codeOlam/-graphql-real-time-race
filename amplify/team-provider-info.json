@@ -25,6 +25,10 @@
         "raceResultsResolver": {
           "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
           "s3Key": "amplify-builds/raceResultsResolver-376e6234445767377a4e-build.zip"
+        },
+        "updateLocation": {
+          "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
+          "s3Key": "amplify-builds/updateLocation-7268703863637a356d4d-build.zip"
         }
       }
     }

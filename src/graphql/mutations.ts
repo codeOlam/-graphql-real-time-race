@@ -155,3 +155,66 @@ export const deleteEvent = /* GraphQL */ `
     }
   }
 `;
+export const createLocationEvent = /* GraphQL */ `
+  mutation CreateLocationEvent(
+    $input: CreateLocationEventInput!
+    $condition: ModelLocationEventConditionInput
+  ) {
+    createLocationEvent(input: $input, condition: $condition) {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateLocationEvent = /* GraphQL */ `
+  mutation UpdateLocationEvent(
+    $input: UpdateLocationEventInput!
+    $condition: ModelLocationEventConditionInput
+  ) {
+    updateLocationEvent(input: $input, condition: $condition) {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteLocationEvent = /* GraphQL */ `
+  mutation DeleteLocationEvent(
+    $input: DeleteLocationEventInput!
+    $condition: ModelLocationEventConditionInput
+  ) {
+    deleteLocationEvent(input: $input, condition: $condition) {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;

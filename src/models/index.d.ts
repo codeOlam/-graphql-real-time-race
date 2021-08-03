@@ -80,6 +80,10 @@ type EventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type LocationEventMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 export declare class StarredEvent {
   readonly id: string;
   readonly owner?: string;
@@ -102,4 +106,18 @@ export declare class Event {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Event, EventMetaData>);
   static copyOf(source: Event, mutator: (draft: MutableModel<Event, EventMetaData>) => MutableModel<Event, EventMetaData> | void): Event;
+}
+
+export declare class LocationEvent {
+  readonly id: string;
+  readonly type?: string;
+  readonly geofenceId?: string;
+  readonly deviceId?: string;
+  readonly sampleTime?: string;
+  readonly longitude?: number;
+  readonly latitude?: number;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<LocationEvent, LocationEventMetaData>);
+  static copyOf(source: LocationEvent, mutator: (draft: MutableModel<LocationEvent, LocationEventMetaData>) => MutableModel<LocationEvent, LocationEventMetaData> | void): LocationEvent;
 }

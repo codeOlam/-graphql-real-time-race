@@ -137,3 +137,57 @@ export const onDeleteEvent = /* GraphQL */ `
     }
   }
 `;
+export const onCreateLocationEvent = /* GraphQL */ `
+  subscription OnCreateLocationEvent {
+    onCreateLocationEvent {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateLocationEvent = /* GraphQL */ `
+  subscription OnUpdateLocationEvent {
+    onUpdateLocationEvent {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteLocationEvent = /* GraphQL */ `
+  subscription OnDeleteLocationEvent {
+    onDeleteLocationEvent {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;

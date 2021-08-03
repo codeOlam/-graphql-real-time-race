@@ -146,6 +146,73 @@ export type DeleteEventInput = {
   _version?: number | null,
 };
 
+export type CreateLocationEventInput = {
+  id?: string | null,
+  type?: string | null,
+  geofenceId?: string | null,
+  deviceId?: string | null,
+  sampleTime?: string | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  _version?: number | null,
+};
+
+export type ModelLocationEventConditionInput = {
+  type?: ModelStringInput | null,
+  geofenceId?: ModelStringInput | null,
+  deviceId?: ModelStringInput | null,
+  sampleTime?: ModelStringInput | null,
+  longitude?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  and?: Array< ModelLocationEventConditionInput | null > | null,
+  or?: Array< ModelLocationEventConditionInput | null > | null,
+  not?: ModelLocationEventConditionInput | null,
+};
+
+export type ModelFloatInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type LocationEvent = {
+  __typename: "LocationEvent",
+  id: string,
+  type?: string | null,
+  geofenceId?: string | null,
+  deviceId?: string | null,
+  sampleTime?: string | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateLocationEventInput = {
+  id: string,
+  type?: string | null,
+  geofenceId?: string | null,
+  deviceId?: string | null,
+  sampleTime?: string | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  _version?: number | null,
+};
+
+export type DeleteLocationEventInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type Race = {
   __typename: "Race",
   PK?: string | null,
@@ -263,6 +330,26 @@ export type ModelEventFilterInput = {
 export type ModelEventConnection = {
   __typename: "ModelEventConnection",
   items?:  Array<Event | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelLocationEventFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  geofenceId?: ModelStringInput | null,
+  deviceId?: ModelStringInput | null,
+  sampleTime?: ModelStringInput | null,
+  longitude?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  and?: Array< ModelLocationEventFilterInput | null > | null,
+  or?: Array< ModelLocationEventFilterInput | null > | null,
+  not?: ModelLocationEventFilterInput | null,
+};
+
+export type ModelLocationEventConnection = {
+  __typename: "ModelLocationEventConnection",
+  items?:  Array<LocationEvent | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
 };
@@ -427,6 +514,75 @@ export type DeleteEventMutation = {
     heart?: number | null,
     thumbsup?: number | null,
     happy?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type CreateLocationEventMutationVariables = {
+  input: CreateLocationEventInput,
+  condition?: ModelLocationEventConditionInput | null,
+};
+
+export type CreateLocationEventMutation = {
+  createLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateLocationEventMutationVariables = {
+  input: UpdateLocationEventInput,
+  condition?: ModelLocationEventConditionInput | null,
+};
+
+export type UpdateLocationEventMutation = {
+  updateLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteLocationEventMutationVariables = {
+  input: DeleteLocationEventInput,
+  condition?: ModelLocationEventConditionInput | null,
+};
+
+export type DeleteLocationEventMutation = {
+  deleteLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -700,6 +856,87 @@ export type SyncEventsQuery = {
   } | null,
 };
 
+export type GetLocationEventQueryVariables = {
+  id: string,
+};
+
+export type GetLocationEventQuery = {
+  getLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListLocationEventsQueryVariables = {
+  filter?: ModelLocationEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListLocationEventsQuery = {
+  listLocationEvents?:  {
+    __typename: "ModelLocationEventConnection",
+    items?:  Array< {
+      __typename: "LocationEvent",
+      id: string,
+      type?: string | null,
+      geofenceId?: string | null,
+      deviceId?: string | null,
+      sampleTime?: string | null,
+      longitude?: number | null,
+      latitude?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncLocationEventsQueryVariables = {
+  filter?: ModelLocationEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncLocationEventsQuery = {
+  syncLocationEvents?:  {
+    __typename: "ModelLocationEventConnection",
+    items?:  Array< {
+      __typename: "LocationEvent",
+      id: string,
+      type?: string | null,
+      geofenceId?: string | null,
+      deviceId?: string | null,
+      sampleTime?: string | null,
+      longitude?: number | null,
+      latitude?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type OnCreateStarredEventSubscriptionVariables = {
   owner?: string | null,
 };
@@ -842,6 +1079,60 @@ export type OnDeleteEventSubscription = {
     heart?: number | null,
     thumbsup?: number | null,
     happy?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateLocationEventSubscription = {
+  onCreateLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateLocationEventSubscription = {
+  onUpdateLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteLocationEventSubscription = {
+  onDeleteLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,

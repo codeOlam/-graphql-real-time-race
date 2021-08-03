@@ -242,3 +242,79 @@ export const syncEvents = /* GraphQL */ `
     }
   }
 `;
+export const getLocationEvent = /* GraphQL */ `
+  query GetLocationEvent($id: ID!) {
+    getLocationEvent(id: $id) {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listLocationEvents = /* GraphQL */ `
+  query ListLocationEvents(
+    $filter: ModelLocationEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLocationEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        geofenceId
+        deviceId
+        sampleTime
+        longitude
+        latitude
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncLocationEvents = /* GraphQL */ `
+  query SyncLocationEvents(
+    $filter: ModelLocationEventFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncLocationEvents(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        type
+        geofenceId
+        deviceId
+        sampleTime
+        longitude
+        latitude
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;

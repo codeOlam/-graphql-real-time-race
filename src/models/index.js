@@ -4,11 +4,12 @@ import { schema } from './schema';
 
 
 
-const { StarredEvent, Event, Race, Result, Constructor, Driver, Lap, Speed, LapTime } = initSchema(schema);
+const { StarredEvent, Event, LocationEvent, Race, Result, Constructor, Driver, Lap, Speed, LapTime } = initSchema(schema);
 
 export {
   StarredEvent,
   Event,
+  LocationEvent,
   Race,
   Result,
   Constructor,
