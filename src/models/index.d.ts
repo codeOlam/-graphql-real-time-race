@@ -4,8 +4,22 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type StarredEventMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type EventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class StarredEvent {
+  readonly id: string;
+  readonly owner?: string;
+  readonly Event?: Event;
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<StarredEvent, StarredEventMetaData>);
+  static copyOf(source: StarredEvent, mutator: (draft: MutableModel<StarredEvent, StarredEventMetaData>) => MutableModel<StarredEvent, StarredEventMetaData> | void): StarredEvent;
 }
 
 export declare class Event {

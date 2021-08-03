@@ -1,23 +1,47 @@
 import { DataStore } from 'aws-amplify'
 import { useState, useEffect } from 'react'
-import { Event } from '../models'
-import { ThumbUpIcon, HeartIcon, EmojiHappyIcon } from '@heroicons/react/solid'
+import { Event, StarredEvent } from '../models'
+import {
+  ThumbUpIcon,
+  HeartIcon,
+  EmojiHappyIcon,
+  StarIcon,
+} from '@heroicons/react/solid'
+import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import sortBy from 'lodash/sortBy'
+import keyBy from 'lodash/keyBy'
 
 function EventPage() {
   const [events, setEvents] = useState<Event[]>([])
+  const [stars, setStars] = useState<{ [key: string]: StarredEvent }>({})
   useEffect(() => {
     DataStore.query(Event).then((events) => setEvents(sortBy(events, 'date')))
+
+    DataStore.query(StarredEvent).then((stars) =>
+      setStars(keyBy(stars, (s) => s.Event!.id))
+    )
 
     const sub1 = DataStore.observe(Event).subscribe((msg) => {
       console.log(msg.opType, msg.element)
       DataStore.query(Event).then((events) => setEvents(sortBy(events, 'date')))
     })
 
+    const sub2 = DataStore.observe(StarredEvent).subscribe((msg) => {
+      console.log(msg.opType, msg.element)
+      DataStore.query(StarredEvent).then((stars) =>
+        setStars(keyBy(stars, (s) => s.Event!.id))
+      )
+    })
+
     return () => {
       sub1.unsubscribe()
+      sub2.unsubscribe()
     }
   }, [])
+
+  const getStar = (event: Event) => {
+    return stars[event.id]
+  }
 
   return (
     <>
@@ -32,7 +56,7 @@ function EventPage() {
         <div className="mx-auto">
           <div className="px-4 py-8 space-y-8">
             {events.map((event) => (
-              <EventView key={event.id} event={event} />
+              <EventView key={event.id} event={event} star={getStar(event)} />
             ))}
           </div>
         </div>
@@ -41,7 +65,7 @@ function EventPage() {
   )
 }
 
-const EventView = ({ event }: { event: Event }) => {
+const EventView = ({ event, star }: { event: Event; star?: StarredEvent }) => {
   const date = new Date(event.date)
 
   const updateEvent = async (emotion: 'heart' | 'happy' | 'thumbsup') => {
@@ -52,6 +76,14 @@ const EventView = ({ event }: { event: Event }) => {
     )
   }
 
+  const addStar = async () => {
+    if (!star) await DataStore.save(new StarredEvent({ Event: event }))
+  }
+
+  const removeStar = async () => {
+    if (star) await DataStore.delete(star)
+  }
+
   return (
     <div className="overflow-hidden bg-white rounded-lg shadow">
       <div className="px-4 py-5 bg-iris bg-opacity-40">
@@ -59,6 +91,23 @@ const EventView = ({ event }: { event: Event }) => {
           <h3 className="text-lg font-medium leading-6 text-gray-900">
             {event.title}
           </h3>
+          <div className="flex flex-row items-center">
+            {star ? (
+              <button onClick={removeStar}>
+                <StarIcon
+                  className="flex-shrink-0 w-6 h-6 text-yellow-500"
+                  aria-hidden="true"
+                />
+              </button>
+            ) : (
+              <button onClick={addStar}>
+                <StarIconOutline
+                  className="flex-shrink-0 w-6 h-6 text-gray-500"
+                  aria-hidden="true"
+                />
+              </button>
+            )}
+          </div>
         </div>
         <p className="max-w-2xl mt-1 text-xs text-gray-500">
           {date.toLocaleString()}
