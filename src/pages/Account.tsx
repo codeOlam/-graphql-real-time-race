@@ -3,8 +3,8 @@ import { GraphQLResult } from '@aws-amplify/api'
 
 import { ChevronRightIcon, SelectorIcon, CheckIcon } from '@heroicons/react/solid'
 import { Listbox, Transition } from '@headlessui/react'
-import { GetRacesQuery, Race as RacefromAPI, GetResultsQuery, Result as ResultFromAPI } from '../API'
-import { getRaces, getResults } from '../graphql/queries'
+import { GetRacesQuery, Race as RacefromAPI, GetResults2Query, Result as ResultFromAPI } from '../API'
+import { getRaces, getResults2 } from '../graphql/queries'
 import { useEffect, useState, Fragment } from 'react'
 
 type Race = Omit<RacefromAPI, '__typename'>
@@ -136,12 +136,12 @@ function Account() {
   useEffect(() => {
     if (!driver) return
     const prom = API.graphql({
-      query: getResults,
+      query: getResults2,
       variables: { driverId: driver.driverId },
-    }) as Promise<GraphQLResult<GetResultsQuery>>
+    }) as Promise<GraphQLResult<GetResults2Query>>
     prom.then((result) => {
-      console.log(result.data?.getResults)
-      setResults(result.data?.getResults as unknown as Result[])
+      console.log(result.data?.getResults2)
+      setResults(result.data?.getResults2 as unknown as Result[])
     })
   }, [driver])
 
