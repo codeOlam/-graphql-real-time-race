@@ -169,6 +169,75 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "4c8cbfbfffa6fd3be393a1c05845651a"
+    "nonModels": {
+        "Race": {
+            "name": "Race",
+            "fields": {
+                "PK": {
+                    "name": "PK",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "SK": {
+                    "name": "SK",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "raceName": {
+                    "name": "raceName",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "round": {
+                    "name": "round",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "season": {
+                    "name": "season",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "date": {
+                    "name": "date",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "time": {
+                    "name": "time",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "url": {
+                    "name": "url",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "Circuit": {
+                    "name": "Circuit",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "acabd7b403d148ab6131349b9b8dd915"
 };

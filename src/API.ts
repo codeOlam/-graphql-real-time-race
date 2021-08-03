@@ -2,6 +2,59 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
+export type CreateStarredEventInput = {
+  id?: string | null,
+  owner?: string | null,
+  _version?: number | null,
+  starredEventEventId?: string | null,
+};
+
+export type ModelStarredEventConditionInput = {
+  and?: Array< ModelStarredEventConditionInput | null > | null,
+  or?: Array< ModelStarredEventConditionInput | null > | null,
+  not?: ModelStarredEventConditionInput | null,
+};
+
+export type StarredEvent = {
+  __typename: "StarredEvent",
+  id: string,
+  owner?: string | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+  Event?: Event | null,
+};
+
+export type Event = {
+  __typename: "Event",
+  id: string,
+  title: string,
+  date: string,
+  description: string,
+  heart?: number | null,
+  thumbsup?: number | null,
+  happy?: number | null,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateStarredEventInput = {
+  id: string,
+  owner?: string | null,
+  _version?: number | null,
+  starredEventEventId?: string | null,
+};
+
+export type DeleteStarredEventInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type CreateEventInput = {
   id?: string | null,
   title: string,
@@ -77,22 +130,6 @@ export type ModelIntInput = {
   attributeType?: ModelAttributeTypes | null,
 };
 
-export type Event = {
-  __typename: "Event",
-  id: string,
-  title: string,
-  date: string,
-  description: string,
-  heart?: number | null,
-  thumbsup?: number | null,
-  happy?: number | null,
-  _version: number,
-  _deleted?: boolean | null,
-  _lastChangedAt: number,
-  createdAt: string,
-  updatedAt: string,
-};
-
 export type UpdateEventInput = {
   id: string,
   title?: string | null,
@@ -109,17 +146,25 @@ export type DeleteEventInput = {
   _version?: number | null,
 };
 
-export type ModelEventFilterInput = {
+export type Race = {
+  __typename: "Race",
+  PK?: string | null,
+  SK?: string | null,
+  raceName?: string | null,
+  round?: number | null,
+  season?: string | null,
+  date?: string | null,
+  time?: string | null,
+  url?: string | null,
+  Circuit?: string | null,
+};
+
+export type ModelStarredEventFilterInput = {
   id?: ModelIDInput | null,
-  title?: ModelStringInput | null,
-  date?: ModelStringInput | null,
-  description?: ModelStringInput | null,
-  heart?: ModelIntInput | null,
-  thumbsup?: ModelIntInput | null,
-  happy?: ModelIntInput | null,
-  and?: Array< ModelEventFilterInput | null > | null,
-  or?: Array< ModelEventFilterInput | null > | null,
-  not?: ModelEventFilterInput | null,
+  owner?: ModelStringInput | null,
+  and?: Array< ModelStarredEventFilterInput | null > | null,
+  or?: Array< ModelStarredEventFilterInput | null > | null,
+  not?: ModelStarredEventFilterInput | null,
 };
 
 export type ModelIDInput = {
@@ -138,11 +183,130 @@ export type ModelIDInput = {
   size?: ModelSizeInput | null,
 };
 
+export type ModelStarredEventConnection = {
+  __typename: "ModelStarredEventConnection",
+  items?:  Array<StarredEvent | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelEventFilterInput = {
+  id?: ModelIDInput | null,
+  title?: ModelStringInput | null,
+  date?: ModelStringInput | null,
+  description?: ModelStringInput | null,
+  heart?: ModelIntInput | null,
+  thumbsup?: ModelIntInput | null,
+  happy?: ModelIntInput | null,
+  and?: Array< ModelEventFilterInput | null > | null,
+  or?: Array< ModelEventFilterInput | null > | null,
+  not?: ModelEventFilterInput | null,
+};
+
 export type ModelEventConnection = {
   __typename: "ModelEventConnection",
   items?:  Array<Event | null > | null,
   nextToken?: string | null,
   startedAt?: number | null,
+};
+
+export type CreateStarredEventMutationVariables = {
+  input: CreateStarredEventInput,
+  condition?: ModelStarredEventConditionInput | null,
+};
+
+export type CreateStarredEventMutation = {
+  createStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateStarredEventMutationVariables = {
+  input: UpdateStarredEventInput,
+  condition?: ModelStarredEventConditionInput | null,
+};
+
+export type UpdateStarredEventMutation = {
+  updateStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteStarredEventMutationVariables = {
+  input: DeleteStarredEventInput,
+  condition?: ModelStarredEventConditionInput | null,
+};
+
+export type DeleteStarredEventMutation = {
+  deleteStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
 };
 
 export type CreateEventMutationVariables = {
@@ -211,6 +375,102 @@ export type DeleteEventMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type GetRacesQuery = {
+  getRaces?:  Array< {
+    __typename: "Race",
+    PK?: string | null,
+    SK?: string | null,
+    raceName?: string | null,
+    round?: number | null,
+    season?: string | null,
+    date?: string | null,
+    time?: string | null,
+    url?: string | null,
+    Circuit?: string | null,
+  } | null > | null,
+};
+
+export type GetStarredEventQueryVariables = {
+  id: string,
+};
+
+export type GetStarredEventQuery = {
+  getStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type ListStarredEventsQueryVariables = {
+  filter?: ModelStarredEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListStarredEventsQuery = {
+  listStarredEvents?:  {
+    __typename: "ModelStarredEventConnection",
+    items?:  Array< {
+      __typename: "StarredEvent",
+      id: string,
+      owner?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncStarredEventsQueryVariables = {
+  filter?: ModelStarredEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncStarredEventsQuery = {
+  syncStarredEvents?:  {
+    __typename: "ModelStarredEventConnection",
+    items?:  Array< {
+      __typename: "StarredEvent",
+      id: string,
+      owner?: string | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
   } | null,
 };
 
@@ -292,6 +552,102 @@ export type SyncEventsQuery = {
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
+  } | null,
+};
+
+export type OnCreateStarredEventSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnCreateStarredEventSubscription = {
+  onCreateStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnUpdateStarredEventSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnUpdateStarredEventSubscription = {
+  onUpdateStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteStarredEventSubscriptionVariables = {
+  owner?: string | null,
+};
+
+export type OnDeleteStarredEventSubscription = {
+  onDeleteStarredEvent?:  {
+    __typename: "StarredEvent",
+    id: string,
+    owner?: string | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+    Event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 

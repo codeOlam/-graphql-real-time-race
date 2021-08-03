@@ -2,7 +2,18 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-
+export declare class Race {
+  readonly PK?: string;
+  readonly SK?: string;
+  readonly raceName?: string;
+  readonly round?: number;
+  readonly season?: string;
+  readonly date?: string;
+  readonly time?: string;
+  readonly url?: string;
+  readonly Circuit?: string;
+  constructor(init: ModelInit<Race>);
+}
 
 type StarredEventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
