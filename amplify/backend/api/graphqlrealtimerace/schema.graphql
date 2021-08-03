@@ -101,3 +101,25 @@ type LocationEvent
   longitude: Float
   latitude: Float
 }
+
+type Message
+  @model
+  @key(
+    fields: ["eventId", "createdAt"]
+    name: "ByEventId"
+    queryField: "messagesByEventId"
+  )
+  @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
+  id: ID!
+  owner: ID
+  content: String!
+  event: Event @connection(fields: ["eventId"])
+  eventId: ID
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Subscription {
+  onMutateMessage(eventId: ID): Message
+    @aws_subscribe(mutations: ["createMessage", "updateMessage"])
+}

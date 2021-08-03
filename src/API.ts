@@ -213,6 +213,71 @@ export type DeleteLocationEventInput = {
   _version?: number | null,
 };
 
+export type CreateMessageInput = {
+  id?: string | null,
+  owner?: string | null,
+  content: string,
+  eventId?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  _version?: number | null,
+};
+
+export type ModelMessageConditionInput = {
+  content?: ModelStringInput | null,
+  eventId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelMessageConditionInput | null > | null,
+  or?: Array< ModelMessageConditionInput | null > | null,
+  not?: ModelMessageConditionInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type Message = {
+  __typename: "Message",
+  id: string,
+  owner?: string | null,
+  content: string,
+  eventId?: string | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+  event?: Event | null,
+};
+
+export type UpdateMessageInput = {
+  id: string,
+  owner?: string | null,
+  content?: string | null,
+  eventId?: string | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  _version?: number | null,
+};
+
+export type DeleteMessageInput = {
+  id: string,
+  _version?: number | null,
+};
+
 export type Race = {
   __typename: "Race",
   PK?: string | null,
@@ -291,22 +356,6 @@ export type ModelStarredEventFilterInput = {
   not?: ModelStarredEventFilterInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type ModelStarredEventConnection = {
   __typename: "ModelStarredEventConnection",
   items?:  Array<StarredEvent | null > | null,
@@ -353,6 +402,41 @@ export type ModelLocationEventConnection = {
   nextToken?: string | null,
   startedAt?: number | null,
 };
+
+export type ModelMessageFilterInput = {
+  id?: ModelIDInput | null,
+  owner?: ModelIDInput | null,
+  content?: ModelStringInput | null,
+  eventId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelMessageFilterInput | null > | null,
+  or?: Array< ModelMessageFilterInput | null > | null,
+  not?: ModelMessageFilterInput | null,
+};
+
+export type ModelMessageConnection = {
+  __typename: "ModelMessageConnection",
+  items?:  Array<Message | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type CreateStarredEventMutationVariables = {
   input: CreateStarredEventInput,
@@ -588,6 +672,111 @@ export type DeleteLocationEventMutation = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type CreateMessageMutationVariables = {
+  input: CreateMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type CreateMessageMutation = {
+  createMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type UpdateMessageMutationVariables = {
+  input: UpdateMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type UpdateMessageMutation = {
+  updateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type DeleteMessageMutationVariables = {
+  input: DeleteMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type DeleteMessageMutation = {
+  deleteMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
 
@@ -937,6 +1126,156 @@ export type SyncLocationEventsQuery = {
   } | null,
 };
 
+export type GetMessageQueryVariables = {
+  id: string,
+};
+
+export type GetMessageQuery = {
+  getMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type ListMessagesQueryVariables = {
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMessagesQuery = {
+  listMessages?:  {
+    __typename: "ModelMessageConnection",
+    items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type MessagesByEventIdQueryVariables = {
+  eventId?: string | null,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MessagesByEventIdQuery = {
+  messagesByEventId?:  {
+    __typename: "ModelMessageConnection",
+    items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type SyncMessagesQueryVariables = {
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncMessagesQuery = {
+  syncMessages?:  {
+    __typename: "ModelMessageConnection",
+    items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type OnMutateMessageSubscriptionVariables = {
+  eventId?: string | null,
+};
+
+export type OnMutateMessageSubscription = {
+  onMutateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
 export type OnCreateStarredEventSubscriptionVariables = {
   owner?: string | null,
 };
@@ -1138,5 +1477,95 @@ export type OnDeleteLocationEventSubscription = {
     _lastChangedAt: number,
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type OnCreateMessageSubscription = {
+  onCreateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnUpdateMessageSubscription = {
+  onUpdateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+  } | null,
+};
+
+export type OnDeleteMessageSubscription = {
+  onDeleteMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
   } | null,
 };
