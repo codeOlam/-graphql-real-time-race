@@ -1,10 +1,12 @@
-type StarredEvent @model @auth(rules: [{allow: owner}]) {
+type StarredEvent @model @auth(rules: [{ allow: owner }]) {
   id: ID!
   owner: String
   Event: Event @connection
 }
 
-type Event @model @auth(rules: [{allow: private, operations: [read, update]}]) {
+type Event
+  @model
+  @auth(rules: [{ allow: private, operations: [read, update] }]) {
   id: ID!
   title: String!
   date: AWSDateTime!
@@ -13,4 +15,19 @@ type Event @model @auth(rules: [{allow: private, operations: [read, update]}]) {
   thumbsup: Int
   happy: Int
 }
- 
+
+type Race {
+  PK: String
+  SK: String
+  raceName: String
+  round: Int
+  season: String
+  date: String
+  time: String
+  url: String
+  Circuit: AWSJSON
+}
+
+type Query {
+  getRaces: [Race]
+}

@@ -1,0 +1,16 @@
+{
+  "version": "2018-05-29",
+  "operation": "Query",
+  "query" : {
+        "expression" : "#PK = :pk AND begins_with(#SK, :sk) ",
+        "expressionNames" : {
+            "#PK" : "PK",
+            "#SK" : "SK"
+        },
+        "expressionValues" : {
+            ":pk" : {"S": "race#2020"},
+            ":sk" : {"S": "info"}
+        }
+    },
+  "limit": 100
+}
