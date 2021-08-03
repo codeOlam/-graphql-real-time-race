@@ -494,6 +494,50 @@ export type GetResultsQuery = {
   } | null > | null,
 };
 
+export type GetResults2QueryVariables = {
+  driverId: string,
+};
+
+export type GetResults2Query = {
+  getResults2?:  Array< {
+    __typename: "Result",
+    Constructor?:  {
+      __typename: "Constructor",
+      constructorId?: string | null,
+      name?: string | null,
+      nationality?: string | null,
+      url?: string | null,
+    } | null,
+    Driver?:  {
+      __typename: "Driver",
+      code?: string | null,
+      dateOfBirth?: string | null,
+      driverId?: string | null,
+      familyName?: string | null,
+      givenName?: string | null,
+      nationality?: string | null,
+      permanentNumber?: string | null,
+      url?: string | null,
+    } | null,
+    FastestLap?:  {
+      __typename: "Lap",
+      lap?: string | null,
+      rank?: string | null,
+    } | null,
+    driverId?: string | null,
+    grid?: string | null,
+    laps?: string | null,
+    number?: string | null,
+    PK?: string | null,
+    points?: string | null,
+    position?: string | null,
+    positionText?: string | null,
+    round?: number | null,
+    SK?: string | null,
+    status?: string | null,
+  } | null > | null,
+};
+
 export type GetStarredEventQueryVariables = {
   id: string,
 };

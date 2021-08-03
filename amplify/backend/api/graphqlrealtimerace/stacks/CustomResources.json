@@ -31,6 +31,43 @@
       "Type": "Custom::EmptyResource",
       "Condition": "AlwaysFalse"
     },
+    "QuerygetResultsResolverPipeline": {
+      "Type": "AWS::AppSync::Resolver",
+      "Properties": {
+        "ApiId": { "Ref": "AppSyncApiId" },
+        "TypeName": "Query",
+        "FieldName": "getResults2",
+        "Kind": "PIPELINE",
+        "RequestMappingTemplate": "{}",
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "PipelineConfig": {
+          "Functions": [
+            { "Fn::GetAtt": ["GetterFunctionConfiguration", "FunctionId"] },
+            { "Fn::GetAtt": ["FilterFunctionConfiguration", "FunctionId"] }
+          ]
+        }
+      }
+    },
+    "GetterFunctionConfiguration": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": { "Ref": "AppSyncApiId" },
+        "Name": "getResultsLambda",
+        "FunctionVersion": "2018-05-29",
+        "DataSourceName": { "Fn::GetAtt": ["LambdaDataSource", "Name"] }
+      }
+    },
+    "FilterFunctionConfiguration": {
+      "Type": "AWS::AppSync::FunctionConfiguration",
+      "Properties": {
+        "ApiId": { "Ref": "AppSyncApiId" },
+        "Name": "fitlterResults",
+        "FunctionVersion": "2018-05-29",
+        "DataSourceName": "NONE",
+        "RequestMappingTemplate": "{}",
+        "ResponseMappingTemplate": "#set($items = [])\n #foreach($result in $context.prev.result)\n #if( $result.status == \"Finished\" )\n $util.qr($items.add($result))\n #end\n #end\n $util.toJson($items)"
+      }
+    },
     "LambdaDataSourceRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {

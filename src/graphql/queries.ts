@@ -54,6 +54,43 @@ export const getResults = /* GraphQL */ `
     }
   }
 `;
+export const getResults2 = /* GraphQL */ `
+  query GetResults2($driverId: String!) {
+    getResults2(driverId: $driverId) {
+      Constructor {
+        constructorId
+        name
+        nationality
+        url
+      }
+      Driver {
+        code
+        dateOfBirth
+        driverId
+        familyName
+        givenName
+        nationality
+        permanentNumber
+        url
+      }
+      FastestLap {
+        lap
+        rank
+      }
+      driverId
+      grid
+      laps
+      number
+      PK
+      points
+      position
+      positionText
+      round
+      SK
+      status
+    }
+  }
+`;
 export const getStarredEvent = /* GraphQL */ `
   query GetStarredEvent($id: ID!) {
     getStarredEvent(id: $id) {
