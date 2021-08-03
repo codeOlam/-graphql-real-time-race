@@ -102,6 +102,13 @@
       "build": true,
       "dependsOn": [
         {
+          "category": "function",
+          "resourceName": "graphqlrealtimeracesharp",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "graphqlrealtimerace",
           "attributes": [
@@ -111,6 +118,11 @@
           ]
         }
       ]
+    },
+    "graphqlrealtimeracesharp": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
     }
   }
 }

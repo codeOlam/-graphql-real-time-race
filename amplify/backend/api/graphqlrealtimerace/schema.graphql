@@ -109,7 +109,13 @@ type Message
     name: "ByEventId"
     queryField: "messagesByEventId"
   )
-  @auth(rules: [{ allow: owner }, { allow: private, operations: [read] }]) {
+  @auth(
+    rules: [
+      { allow: owner }
+      { allow: private, operations: [read] }
+      { allow: private, provider: iam, operations: [update] }
+    ]
+  ) {
   id: ID!
   owner: ID
   content: String!
@@ -117,9 +123,12 @@ type Message
   eventId: ID
   createdAt: AWSDateTime!
   updatedAt: AWSDateTime!
+  original: S3Object
+  thumbnail: S3Object
 }
 
-type Subscription {
-  onMutateMessage(eventId: ID): Message
-    @aws_subscribe(mutations: ["createMessage", "updateMessage"])
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
 }

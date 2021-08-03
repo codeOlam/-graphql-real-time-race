@@ -230,6 +230,16 @@ export const createMessage = /* GraphQL */ `
       eventId
       createdAt
       updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
       _version
       _deleted
       _lastChangedAt
@@ -262,6 +272,16 @@ export const updateMessage = /* GraphQL */ `
       eventId
       createdAt
       updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
       _version
       _deleted
       _lastChangedAt
@@ -294,6 +314,16 @@ export const deleteMessage = /* GraphQL */ `
       eventId
       createdAt
       updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
       _version
       _deleted
       _lastChangedAt

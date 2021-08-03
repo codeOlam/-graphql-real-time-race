@@ -5,5 +5,14 @@
         "Mutation"
       ]
     }
-  }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "graphqlrealtimeracesharp",
+      "env": "staging",
+      "version": "Always choose latest version",
+      "isLatestVersionSelected": true
+    }
+  ]
 }

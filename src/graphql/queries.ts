@@ -327,6 +327,16 @@ export const getMessage = /* GraphQL */ `
       eventId
       createdAt
       updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
       _version
       _deleted
       _lastChangedAt

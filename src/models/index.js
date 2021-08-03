@@ -4,18 +4,19 @@ import { schema } from './schema';
 
 
 
-const { Message, Event, StarredEvent, LocationEvent, Race, Result, Constructor, Driver, Lap, Speed, LapTime } = initSchema(schema);
+const { StarredEvent, Event, LocationEvent, Message, Race, Result, Constructor, Driver, Lap, Speed, LapTime, S3Object } = initSchema(schema);
 
 export {
-  Message,
-  Event,
   StarredEvent,
+  Event,
   LocationEvent,
+  Message,
   Race,
   Result,
   Constructor,
   Driver,
   Lap,
   Speed,
-  LapTime
+  LapTime,
+  S3Object
 };

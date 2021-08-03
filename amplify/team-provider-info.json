@@ -29,6 +29,14 @@
         "updateLocation": {
           "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
           "s3Key": "amplify-builds/updateLocation-7268703863637a356d4d-build.zip"
+        },
+        "S3Trigger2312c7d6": {
+          "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
+          "s3Key": "amplify-builds/S3Trigger2312c7d6-46426947313736685979-build.zip"
+        },
+        "graphqlrealtimeracesharp": {
+          "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
+          "s3Key": "amplify-builds/graphqlrealtimeracesharp-LambdaLayerVersion2d3ae85b-build.zip"
         }
       }
     }

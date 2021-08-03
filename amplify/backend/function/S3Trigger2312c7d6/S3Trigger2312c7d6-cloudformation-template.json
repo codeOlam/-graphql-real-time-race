@@ -16,6 +16,16 @@
     "apigraphqlrealtimeraceGraphQLAPIKeyOutput": {
       "Type": "String",
       "Default": "apigraphqlrealtimeraceGraphQLAPIKeyOutput"
+    },
+    "functiongraphqlrealtimeracesharpArn": {
+      "Type": "String",
+      "Default": "functiongraphqlrealtimeracesharpArn"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -81,7 +91,21 @@
           ]
         },
         "Runtime": "nodejs14.x",
-        "Timeout": "25"
+        "Timeout": "60",
+        "MemorySize": "1024",
+        "Layers": [
+          {
+            "Ref": "functiongraphqlrealtimeracesharpArn"
+          }
+        ],
+        "Code": {
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
+        }
       }
     },
     "LambdaExecutionRole": {

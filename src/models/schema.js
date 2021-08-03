@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Message": {
-            "name": "Message",
+        "StarredEvent": {
+            "name": "StarredEvent",
             "fields": {
                 "id": {
                     "name": "id",
@@ -13,19 +13,12 @@ export const schema = {
                 "owner": {
                     "name": "owner",
                     "isArray": false,
-                    "type": "ID",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
-                "content": {
-                    "name": "content",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "event": {
-                    "name": "event",
+                "Event": {
+                    "name": "Event",
                     "isArray": false,
                     "type": {
                         "model": "Event"
@@ -33,50 +26,33 @@ export const schema = {
                     "isRequired": false,
                     "attributes": [],
                     "association": {
-                        "connectionType": "HAS_ONE",
-                        "associatedWith": "id",
-                        "targetName": "eventId"
+                        "connectionType": "BELONGS_TO",
+                        "targetName": "starredEventEventId"
                     }
-                },
-                "eventId": {
-                    "name": "eventId",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": false,
-                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": true,
-                    "attributes": []
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
                 },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
                     "type": "AWSDateTime",
-                    "isRequired": true,
-                    "attributes": []
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
                 }
             },
             "syncable": true,
-            "pluralName": "Messages",
+            "pluralName": "StarredEvents",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
-                },
-                {
-                    "type": "key",
-                    "properties": {
-                        "fields": [
-                            "eventId",
-                            "createdAt"
-                        ],
-                        "name": "ByEventId",
-                        "queryField": "messagesByEventId"
-                    }
                 },
                 {
                     "type": "auth",
@@ -91,12 +67,6 @@ export const schema = {
                                     "create",
                                     "update",
                                     "delete",
-                                    "read"
-                                ]
-                            },
-                            {
-                                "allow": "private",
-                                "operations": [
                                     "read"
                                 ]
                             }
@@ -190,81 +160,6 @@ export const schema = {
                                 "operations": [
                                     "read",
                                     "update"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "StarredEvent": {
-            "name": "StarredEvent",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "owner": {
-                    "name": "owner",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": false,
-                    "attributes": []
-                },
-                "Event": {
-                    "name": "Event",
-                    "isArray": false,
-                    "type": {
-                        "model": "Event"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "starredEventEventId"
-                    }
-                },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
-                "updatedAt": {
-                    "name": "updatedAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                }
-            },
-            "syncable": true,
-            "pluralName": "StarredEvents",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "provider": "userPools",
-                                "ownerField": "owner",
-                                "allow": "owner",
-                                "identityClaim": "cognito:username",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
                                 ]
                             }
                         ]
@@ -367,6 +262,136 @@ export const schema = {
                                     "update",
                                     "delete",
                                     "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
+        "Message": {
+            "name": "Message",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "owner": {
+                    "name": "owner",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "content": {
+                    "name": "content",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "event": {
+                    "name": "event",
+                    "isArray": false,
+                    "type": {
+                        "model": "Event"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "HAS_ONE",
+                        "associatedWith": "id",
+                        "targetName": "eventId"
+                    }
+                },
+                "eventId": {
+                    "name": "eventId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "original": {
+                    "name": "original",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "thumbnail": {
+                    "name": "thumbnail",
+                    "isArray": false,
+                    "type": {
+                        "nonModel": "S3Object"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                }
+            },
+            "syncable": true,
+            "pluralName": "Messages",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "fields": [
+                            "eventId",
+                            "createdAt"
+                        ],
+                        "name": "ByEventId",
+                        "queryField": "messagesByEventId"
+                    }
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "provider": "userPools",
+                                "ownerField": "owner",
+                                "allow": "owner",
+                                "identityClaim": "cognito:username",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "operations": [
+                                    "read"
+                                ]
+                            },
+                            {
+                                "allow": "private",
+                                "provider": "iam",
+                                "operations": [
+                                    "update"
                                 ]
                             }
                         ]
@@ -715,7 +740,33 @@ export const schema = {
                     "attributes": []
                 }
             }
+        },
+        "S3Object": {
+            "name": "S3Object",
+            "fields": {
+                "bucket": {
+                    "name": "bucket",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "key": {
+                    "name": "key",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "region": {
+                    "name": "region",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                }
+            }
         }
     },
-    "version": "4aa661626971d3ba251658b393df7f22"
+    "version": "dd949e7ef0c4d975ed297709a06b0613"
 };

@@ -220,7 +220,15 @@ export type CreateMessageInput = {
   eventId?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
+  original?: S3ObjectInput | null,
+  thumbnail?: S3ObjectInput | null,
   _version?: number | null,
+};
+
+export type S3ObjectInput = {
+  bucket: string,
+  key: string,
+  region: string,
 };
 
 export type ModelMessageConditionInput = {
@@ -257,10 +265,19 @@ export type Message = {
   eventId?: string | null,
   createdAt: string,
   updatedAt: string,
+  original?: S3Object | null,
+  thumbnail?: S3Object | null,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   event?: Event | null,
+};
+
+export type S3Object = {
+  __typename: "S3Object",
+  bucket: string,
+  key: string,
+  region: string,
 };
 
 export type UpdateMessageInput = {
@@ -270,6 +287,8 @@ export type UpdateMessageInput = {
   eventId?: string | null,
   createdAt?: string | null,
   updatedAt?: string | null,
+  original?: S3ObjectInput | null,
+  thumbnail?: S3ObjectInput | null,
   _version?: number | null,
 };
 
@@ -689,6 +708,18 @@ export type CreateMessageMutation = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -724,6 +755,18 @@ export type UpdateMessageMutation = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -759,6 +802,18 @@ export type DeleteMessageMutation = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -1139,6 +1194,18 @@ export type GetMessageQuery = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -1239,40 +1306,6 @@ export type SyncMessagesQuery = {
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
-  } | null,
-};
-
-export type OnMutateMessageSubscriptionVariables = {
-  eventId?: string | null,
-};
-
-export type OnMutateMessageSubscription = {
-  onMutateMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    event?:  {
-      __typename: "Event",
-      id: string,
-      title: string,
-      date: string,
-      description: string,
-      heart?: number | null,
-      thumbsup?: number | null,
-      happy?: number | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
@@ -1489,6 +1522,18 @@ export type OnCreateMessageSubscription = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -1519,6 +1564,18 @@ export type OnUpdateMessageSubscription = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
@@ -1549,6 +1606,18 @@ export type OnDeleteMessageSubscription = {
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
