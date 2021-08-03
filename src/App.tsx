@@ -16,6 +16,10 @@ import Home from './pages/Home'
 import EventPage from './pages/Events'
 import Account from './pages/Account'
 
+import Amplify from 'aws-amplify'
+import config from './aws-exports'
+Amplify.configure(config)
+
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }

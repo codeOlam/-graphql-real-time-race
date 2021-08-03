@@ -1,0 +1,10 @@
+type Event @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  date: AWSDateTime!
+  description: String!
+  heart: Int
+  thumbsup: Int
+  happy: Int
+}
+ 
