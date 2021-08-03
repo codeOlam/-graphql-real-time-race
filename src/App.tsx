@@ -16,7 +16,8 @@ import Home from './pages/Home'
 import EventPage from './pages/Events'
 import Account from './pages/Account'
 
-import Amplify from 'aws-amplify'
+import { withAuthenticator } from '@aws-amplify/ui-react'
+import Amplify, { Auth } from 'aws-amplify'
 import config from './aws-exports'
 Amplify.configure(config)
 
@@ -151,7 +152,13 @@ function Main() {
                       >
                         Live Race
                       </Link>
-                      <button className="block w-full px-3 py-2 text-base font-medium text-gray-900 rounded-md bg-summer hover:bg-gray-100 hover:text-gray-800">
+                      <button
+                        onClick={() => {
+                          Auth.signOut()
+                          window.location.reload()
+                        }}
+                        className="block w-full px-3 py-2 text-base font-medium text-gray-900 rounded-md bg-summer hover:bg-gray-100 hover:text-gray-800"
+                      >
                         Sign Out
                       </button>
                     </div>
@@ -190,6 +197,11 @@ function Main() {
 }
 
 function App() {
+  useEffect(() => {
+    Auth.currentUserInfo().then((data) => {
+      console.log(`user data >`, JSON.stringify(data, null, 2))
+    })
+  }, [])
   return (
     <Router>
       <div className="font-sans App bg-gray-50">
@@ -201,4 +213,4 @@ function App() {
   )
 }
 
-export default App
+export default withAuthenticator(App)
