@@ -1,0 +1,12 @@
+{
+  "kinesisStreamName": "graphqlrealtimeraceKinesis",
+  "kinesisStreamShardCount": 1,
+  "authRoleName": {
+    "Ref": "AuthRoleName"
+  },
+  "unauthRoleName": {
+    "Ref": "UnauthRoleName"
+  },
+  "authPolicyName": "kinesis_amplify_27a1942a",
+  "unauthPolicyName": "kinesis_amplify_27a1942a"
+}

@@ -152,6 +152,10 @@
     "graphqlrealtimerace": {
       "service": "Pinpoint",
       "providerPlugin": "awscloudformation"
+    },
+    "graphqlrealtimeraceKinesis": {
+      "service": "Kinesis",
+      "providerPlugin": "awscloudformation"
     }
   }
 }
