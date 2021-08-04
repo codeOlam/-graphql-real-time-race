@@ -133,7 +133,38 @@ type S3Object {
   region: String!
 }
 
+type RaceEvent
+  @model
+  @key(
+    fields: ["eventId", "createdAt"]
+    name: "ByEventId"
+    queryField: "raceEventsByEventId"
+  )
+  @auth(
+    rules: [
+      { allow: private, provider: iam, operations: [read, create] }
+      { allow: private, operations: [read] }
+    ]
+  ) {
+  id: ID!
+  event: Event @connection(fields: ["eventId"])
+  eventId: ID
+  type: String
+  competitor: String
+  lap: Int
+  time: String
+  position: Int
+  speed: Int
+  gear: Int
+  longitude: Float
+  latitude: Float
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
 type Subscription {
   onMutateMessage(eventId: ID): Message
     @aws_subscribe(mutations: ["createMessage", "updateMessage"])
+  onReceiveRaceEvent(eventId: ID): RaceEvent
+    @aws_subscribe(mutations: ["createRaceEvent"])
 }

@@ -19,12 +19,12 @@ export type StarredEvent = {
   __typename: "StarredEvent",
   id: string,
   owner?: string | null,
+  Event?: Event | null,
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-  Event?: Event | null,
 };
 
 export type Event = {
@@ -146,8 +146,8 @@ export type DeleteEventInput = {
   _version?: number | null,
 };
 
-export type CreateLocationEventInput = {
-  id?: string | null,
+export type UpdateLocationEventInput = {
+  id: string,
   type?: string | null,
   geofenceId?: string | null,
   deviceId?: string | null,
@@ -195,17 +195,6 @@ export type LocationEvent = {
   _lastChangedAt: number,
   createdAt: string,
   updatedAt: string,
-};
-
-export type UpdateLocationEventInput = {
-  id: string,
-  type?: string | null,
-  geofenceId?: string | null,
-  deviceId?: string | null,
-  sampleTime?: string | null,
-  longitude?: number | null,
-  latitude?: number | null,
-  _version?: number | null,
 };
 
 export type DeleteLocationEventInput = {
@@ -262,6 +251,7 @@ export type Message = {
   id: string,
   owner?: string | null,
   content: string,
+  event?: Event | null,
   eventId?: string | null,
   createdAt: string,
   updatedAt: string,
@@ -270,7 +260,6 @@ export type Message = {
   _version: number,
   _deleted?: boolean | null,
   _lastChangedAt: number,
-  event?: Event | null,
 };
 
 export type S3Object = {
@@ -278,6 +267,83 @@ export type S3Object = {
   bucket: string,
   key: string,
   region: string,
+};
+
+export type DeleteMessageInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type UpdateRaceEventInput = {
+  id: string,
+  eventId?: string | null,
+  type?: string | null,
+  competitor?: string | null,
+  lap?: number | null,
+  time?: string | null,
+  position?: number | null,
+  speed?: number | null,
+  gear?: number | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
+  _version?: number | null,
+};
+
+export type ModelRaceEventConditionInput = {
+  eventId?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  competitor?: ModelStringInput | null,
+  lap?: ModelIntInput | null,
+  time?: ModelStringInput | null,
+  position?: ModelIntInput | null,
+  speed?: ModelIntInput | null,
+  gear?: ModelIntInput | null,
+  longitude?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelRaceEventConditionInput | null > | null,
+  or?: Array< ModelRaceEventConditionInput | null > | null,
+  not?: ModelRaceEventConditionInput | null,
+};
+
+export type RaceEvent = {
+  __typename: "RaceEvent",
+  id: string,
+  event?: Event | null,
+  eventId?: string | null,
+  type?: string | null,
+  competitor?: string | null,
+  lap?: number | null,
+  time?: string | null,
+  position?: number | null,
+  speed?: number | null,
+  gear?: number | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  createdAt: string,
+  updatedAt: string,
+  _version: number,
+  _deleted?: boolean | null,
+  _lastChangedAt: number,
+};
+
+export type DeleteRaceEventInput = {
+  id: string,
+  _version?: number | null,
+};
+
+export type CreateLocationEventInput = {
+  id?: string | null,
+  type?: string | null,
+  geofenceId?: string | null,
+  deviceId?: string | null,
+  sampleTime?: string | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  _version?: number | null,
 };
 
 export type UpdateMessageInput = {
@@ -292,8 +358,20 @@ export type UpdateMessageInput = {
   _version?: number | null,
 };
 
-export type DeleteMessageInput = {
-  id: string,
+export type CreateRaceEventInput = {
+  id?: string | null,
+  eventId?: string | null,
+  type?: string | null,
+  competitor?: string | null,
+  lap?: number | null,
+  time?: string | null,
+  position?: number | null,
+  speed?: number | null,
+  gear?: number | null,
+  longitude?: number | null,
+  latitude?: number | null,
+  createdAt?: string | null,
+  updatedAt?: string | null,
   _version?: number | null,
 };
 
@@ -402,26 +480,6 @@ export type ModelEventConnection = {
   startedAt?: number | null,
 };
 
-export type ModelLocationEventFilterInput = {
-  id?: ModelIDInput | null,
-  type?: ModelStringInput | null,
-  geofenceId?: ModelStringInput | null,
-  deviceId?: ModelStringInput | null,
-  sampleTime?: ModelStringInput | null,
-  longitude?: ModelFloatInput | null,
-  latitude?: ModelFloatInput | null,
-  and?: Array< ModelLocationEventFilterInput | null > | null,
-  or?: Array< ModelLocationEventFilterInput | null > | null,
-  not?: ModelLocationEventFilterInput | null,
-};
-
-export type ModelLocationEventConnection = {
-  __typename: "ModelLocationEventConnection",
-  items?:  Array<LocationEvent | null > | null,
-  nextToken?: string | null,
-  startedAt?: number | null,
-};
-
 export type ModelMessageFilterInput = {
   id?: ModelIDInput | null,
   owner?: ModelIDInput | null,
@@ -457,6 +515,52 @@ export enum ModelSortDirection {
 }
 
 
+export type ModelLocationEventFilterInput = {
+  id?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  geofenceId?: ModelStringInput | null,
+  deviceId?: ModelStringInput | null,
+  sampleTime?: ModelStringInput | null,
+  longitude?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  and?: Array< ModelLocationEventFilterInput | null > | null,
+  or?: Array< ModelLocationEventFilterInput | null > | null,
+  not?: ModelLocationEventFilterInput | null,
+};
+
+export type ModelLocationEventConnection = {
+  __typename: "ModelLocationEventConnection",
+  items?:  Array<LocationEvent | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
+export type ModelRaceEventFilterInput = {
+  id?: ModelIDInput | null,
+  eventId?: ModelIDInput | null,
+  type?: ModelStringInput | null,
+  competitor?: ModelStringInput | null,
+  lap?: ModelIntInput | null,
+  time?: ModelStringInput | null,
+  position?: ModelIntInput | null,
+  speed?: ModelIntInput | null,
+  gear?: ModelIntInput | null,
+  longitude?: ModelFloatInput | null,
+  latitude?: ModelFloatInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelRaceEventFilterInput | null > | null,
+  or?: Array< ModelRaceEventFilterInput | null > | null,
+  not?: ModelRaceEventFilterInput | null,
+};
+
+export type ModelRaceEventConnection = {
+  __typename: "ModelRaceEventConnection",
+  items?:  Array<RaceEvent | null > | null,
+  nextToken?: string | null,
+  startedAt?: number | null,
+};
+
 export type CreateStarredEventMutationVariables = {
   input: CreateStarredEventInput,
   condition?: ModelStarredEventConditionInput | null,
@@ -467,11 +571,6 @@ export type CreateStarredEventMutation = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -487,6 +586,11 @@ export type CreateStarredEventMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -500,11 +604,6 @@ export type UpdateStarredEventMutation = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -520,6 +619,11 @@ export type UpdateStarredEventMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -533,11 +637,6 @@ export type DeleteStarredEventMutation = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -553,6 +652,11 @@ export type DeleteStarredEventMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -625,29 +729,6 @@ export type DeleteEventMutation = {
   } | null,
 };
 
-export type CreateLocationEventMutationVariables = {
-  input: CreateLocationEventInput,
-  condition?: ModelLocationEventConditionInput | null,
-};
-
-export type CreateLocationEventMutation = {
-  createLocationEvent?:  {
-    __typename: "LocationEvent",
-    id: string,
-    type?: string | null,
-    geofenceId?: string | null,
-    deviceId?: string | null,
-    sampleTime?: string | null,
-    longitude?: number | null,
-    latitude?: number | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
 export type UpdateLocationEventMutationVariables = {
   input: UpdateLocationEventInput,
   condition?: ModelLocationEventConditionInput | null,
@@ -705,6 +786,21 @@ export type CreateMessageMutation = {
     id: string,
     owner?: string | null,
     content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -723,68 +819,6 @@ export type CreateMessageMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
-    event?:  {
-      __typename: "Event",
-      id: string,
-      title: string,
-      date: string,
-      description: string,
-      heart?: number | null,
-      thumbsup?: number | null,
-      happy?: number | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-  } | null,
-};
-
-export type UpdateMessageMutationVariables = {
-  input: UpdateMessageInput,
-  condition?: ModelMessageConditionInput | null,
-};
-
-export type UpdateMessageMutation = {
-  updateMessage?:  {
-    __typename: "Message",
-    id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    original?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    thumbnail?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    event?:  {
-      __typename: "Event",
-      id: string,
-      title: string,
-      date: string,
-      description: string,
-      heart?: number | null,
-      thumbsup?: number | null,
-      happy?: number | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
   } | null,
 };
 
@@ -799,6 +833,21 @@ export type DeleteMessageMutation = {
     id: string,
     owner?: string | null,
     content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -817,6 +866,18 @@ export type DeleteMessageMutation = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+  } | null,
+};
+
+export type UpdateRaceEventMutationVariables = {
+  input: UpdateRaceEventInput,
+  condition?: ModelRaceEventConditionInput | null,
+};
+
+export type UpdateRaceEventMutation = {
+  updateRaceEvent?:  {
+    __typename: "RaceEvent",
+    id: string,
     event?:  {
       __typename: "Event",
       id: string,
@@ -832,6 +893,175 @@ export type DeleteMessageMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type DeleteRaceEventMutationVariables = {
+  input: DeleteRaceEventInput,
+  condition?: ModelRaceEventConditionInput | null,
+};
+
+export type DeleteRaceEventMutation = {
+  deleteRaceEvent?:  {
+    __typename: "RaceEvent",
+    id: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateLocationEventMutationVariables = {
+  input: CreateLocationEventInput,
+  condition?: ModelLocationEventConditionInput | null,
+};
+
+export type CreateLocationEventMutation = {
+  createLocationEvent?:  {
+    __typename: "LocationEvent",
+    id: string,
+    type?: string | null,
+    geofenceId?: string | null,
+    deviceId?: string | null,
+    sampleTime?: string | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateMessageMutationVariables = {
+  input: UpdateMessageInput,
+  condition?: ModelMessageConditionInput | null,
+};
+
+export type UpdateMessageMutation = {
+  updateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type CreateRaceEventMutationVariables = {
+  input: CreateRaceEventInput,
+  condition?: ModelRaceEventConditionInput | null,
+};
+
+export type CreateRaceEventMutation = {
+  createRaceEvent?:  {
+    __typename: "RaceEvent",
+    id: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
@@ -956,6 +1186,46 @@ export type GetResults2Query = {
   } | null > | null,
 };
 
+export type SyncStarredEventsQueryVariables = {
+  filter?: ModelStarredEventFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+  lastSync?: number | null,
+};
+
+export type SyncStarredEventsQuery = {
+  syncStarredEvents?:  {
+    __typename: "ModelStarredEventConnection",
+    items?:  Array< {
+      __typename: "StarredEvent",
+      id: string,
+      owner?: string | null,
+      Event?:  {
+        __typename: "Event",
+        id: string,
+        title: string,
+        date: string,
+        description: string,
+        heart?: number | null,
+        thumbsup?: number | null,
+        happy?: number | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
 export type GetStarredEventQueryVariables = {
   id: string,
 };
@@ -965,11 +1235,6 @@ export type GetStarredEventQuery = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -985,6 +1250,11 @@ export type GetStarredEventQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1001,11 +1271,6 @@ export type ListStarredEventsQuery = {
       __typename: "StarredEvent",
       id: string,
       owner?: string | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
-      createdAt: string,
-      updatedAt: string,
       Event?:  {
         __typename: "Event",
         id: string,
@@ -1021,46 +1286,41 @@ export type ListStarredEventsQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type SyncStarredEventsQueryVariables = {
-  filter?: ModelStarredEventFilterInput | null,
+export type SyncEventsQueryVariables = {
+  filter?: ModelEventFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncStarredEventsQuery = {
-  syncStarredEvents?:  {
-    __typename: "ModelStarredEventConnection",
+export type SyncEventsQuery = {
+  syncEvents?:  {
+    __typename: "ModelEventConnection",
     items?:  Array< {
-      __typename: "StarredEvent",
+      __typename: "Event",
       id: string,
-      owner?: string | null,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
       _version: number,
       _deleted?: boolean | null,
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
-      Event?:  {
-        __typename: "Event",
-        id: string,
-        title: string,
-        date: string,
-        description: string,
-        heart?: number | null,
-        thumbsup?: number | null,
-        happy?: number | null,
-        _version: number,
-        _deleted?: boolean | null,
-        _lastChangedAt: number,
-        createdAt: string,
-        updatedAt: string,
-      } | null,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -1118,17 +1378,71 @@ export type ListEventsQuery = {
   } | null,
 };
 
-export type SyncEventsQueryVariables = {
-  filter?: ModelEventFilterInput | null,
+export type SyncMessagesQueryVariables = {
+  filter?: ModelMessageFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncEventsQuery = {
-  syncEvents?:  {
-    __typename: "ModelEventConnection",
+export type SyncMessagesQuery = {
+  syncMessages?:  {
+    __typename: "ModelMessageConnection",
     items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      event?:  {
+        __typename: "Event",
+        id: string,
+        title: string,
+        date: string,
+        description: string,
+        heart?: number | null,
+        thumbsup?: number | null,
+        happy?: number | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      original?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      thumbnail?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type GetMessageQueryVariables = {
+  id: string,
+};
+
+export type GetMessageQuery = {
+  getMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    event?:  {
       __typename: "Event",
       id: string,
       title: string,
@@ -1142,6 +1456,131 @@ export type SyncEventsQuery = {
       _lastChangedAt: number,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type ListMessagesQueryVariables = {
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMessagesQuery = {
+  listMessages?:  {
+    __typename: "ModelMessageConnection",
+    items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      event?:  {
+        __typename: "Event",
+        id: string,
+        title: string,
+        date: string,
+        description: string,
+        heart?: number | null,
+        thumbsup?: number | null,
+        happy?: number | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      original?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      thumbnail?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+    } | null > | null,
+    nextToken?: string | null,
+    startedAt?: number | null,
+  } | null,
+};
+
+export type MessagesByEventIdQueryVariables = {
+  eventId?: string | null,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMessageFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MessagesByEventIdQuery = {
+  messagesByEventId?:  {
+    __typename: "ModelMessageConnection",
+    items?:  Array< {
+      __typename: "Message",
+      id: string,
+      owner?: string | null,
+      content: string,
+      event?:  {
+        __typename: "Event",
+        id: string,
+        title: string,
+        date: string,
+        description: string,
+        heart?: number | null,
+        thumbsup?: number | null,
+        happy?: number | null,
+        _version: number,
+        _deleted?: boolean | null,
+        _lastChangedAt: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      eventId?: string | null,
+      createdAt: string,
+      updatedAt: string,
+      original?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      thumbnail?:  {
+        __typename: "S3Object",
+        bucket: string,
+        key: string,
+        region: string,
+      } | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -1229,34 +1668,14 @@ export type SyncLocationEventsQuery = {
   } | null,
 };
 
-export type GetMessageQueryVariables = {
+export type GetRaceEventQueryVariables = {
   id: string,
 };
 
-export type GetMessageQuery = {
-  getMessage?:  {
-    __typename: "Message",
+export type GetRaceEventQuery = {
+  getRaceEvent?:  {
+    __typename: "RaceEvent",
     id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    original?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    thumbnail?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     event?:  {
       __typename: "Event",
       id: string,
@@ -1272,41 +1691,36 @@ export type GetMessageQuery = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
-export type ListMessagesQueryVariables = {
-  filter?: ModelMessageFilterInput | null,
+export type ListRaceEventsQueryVariables = {
+  filter?: ModelRaceEventFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListMessagesQuery = {
-  listMessages?:  {
-    __typename: "ModelMessageConnection",
+export type ListRaceEventsQuery = {
+  listRaceEvents?:  {
+    __typename: "ModelRaceEventConnection",
     items?:  Array< {
-      __typename: "Message",
+      __typename: "RaceEvent",
       id: string,
-      owner?: string | null,
-      content: string,
-      eventId?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      original?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      thumbnail?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       event?:  {
         __typename: "Event",
         id: string,
@@ -1322,47 +1736,42 @@ export type ListMessagesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      eventId?: string | null,
+      type?: string | null,
+      competitor?: string | null,
+      lap?: number | null,
+      time?: string | null,
+      position?: number | null,
+      speed?: number | null,
+      gear?: number | null,
+      longitude?: number | null,
+      latitude?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type MessagesByEventIdQueryVariables = {
+export type RaceEventsByEventIdQueryVariables = {
   eventId?: string | null,
   createdAt?: ModelStringKeyConditionInput | null,
   sortDirection?: ModelSortDirection | null,
-  filter?: ModelMessageFilterInput | null,
+  filter?: ModelRaceEventFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type MessagesByEventIdQuery = {
-  messagesByEventId?:  {
-    __typename: "ModelMessageConnection",
+export type RaceEventsByEventIdQuery = {
+  raceEventsByEventId?:  {
+    __typename: "ModelRaceEventConnection",
     items?:  Array< {
-      __typename: "Message",
+      __typename: "RaceEvent",
       id: string,
-      owner?: string | null,
-      content: string,
-      eventId?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      original?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      thumbnail?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       event?:  {
         __typename: "Event",
         id: string,
@@ -1378,45 +1787,40 @@ export type MessagesByEventIdQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      eventId?: string | null,
+      type?: string | null,
+      competitor?: string | null,
+      lap?: number | null,
+      time?: string | null,
+      position?: number | null,
+      speed?: number | null,
+      gear?: number | null,
+      longitude?: number | null,
+      latitude?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
   } | null,
 };
 
-export type SyncMessagesQueryVariables = {
-  filter?: ModelMessageFilterInput | null,
+export type SyncRaceEventsQueryVariables = {
+  filter?: ModelRaceEventFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
   lastSync?: number | null,
 };
 
-export type SyncMessagesQuery = {
-  syncMessages?:  {
-    __typename: "ModelMessageConnection",
+export type SyncRaceEventsQuery = {
+  syncRaceEvents?:  {
+    __typename: "ModelRaceEventConnection",
     items?:  Array< {
-      __typename: "Message",
+      __typename: "RaceEvent",
       id: string,
-      owner?: string | null,
-      content: string,
-      eventId?: string | null,
-      createdAt: string,
-      updatedAt: string,
-      original?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      thumbnail?:  {
-        __typename: "S3Object",
-        bucket: string,
-        key: string,
-        region: string,
-      } | null,
-      _version: number,
-      _deleted?: boolean | null,
-      _lastChangedAt: number,
       event?:  {
         __typename: "Event",
         id: string,
@@ -1432,6 +1836,21 @@ export type SyncMessagesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      eventId?: string | null,
+      type?: string | null,
+      competitor?: string | null,
+      lap?: number | null,
+      time?: string | null,
+      position?: number | null,
+      speed?: number | null,
+      gear?: number | null,
+      longitude?: number | null,
+      latitude?: number | null,
+      createdAt: string,
+      updatedAt: string,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
     } | null > | null,
     nextToken?: string | null,
     startedAt?: number | null,
@@ -1448,6 +1867,21 @@ export type OnMutateMessageSubscription = {
     id: string,
     owner?: string | null,
     content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     eventId?: string | null,
     createdAt: string,
     updatedAt: string,
@@ -1466,6 +1900,17 @@ export type OnMutateMessageSubscription = {
     _version: number,
     _deleted?: boolean | null,
     _lastChangedAt: number,
+  } | null,
+};
+
+export type OnReceiveRaceEventSubscriptionVariables = {
+  eventId?: string | null,
+};
+
+export type OnReceiveRaceEventSubscription = {
+  onReceiveRaceEvent?:  {
+    __typename: "RaceEvent",
+    id: string,
     event?:  {
       __typename: "Event",
       id: string,
@@ -1481,11 +1926,26 @@ export type OnMutateMessageSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
 export type OnCreateStarredEventSubscriptionVariables = {
-  owner?: string | null,
+  owner: string,
 };
 
 export type OnCreateStarredEventSubscription = {
@@ -1493,11 +1953,6 @@ export type OnCreateStarredEventSubscription = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -1513,11 +1968,16 @@ export type OnCreateStarredEventSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
 export type OnUpdateStarredEventSubscriptionVariables = {
-  owner?: string | null,
+  owner: string,
 };
 
 export type OnUpdateStarredEventSubscription = {
@@ -1525,11 +1985,6 @@ export type OnUpdateStarredEventSubscription = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -1545,11 +2000,16 @@ export type OnUpdateStarredEventSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
 export type OnDeleteStarredEventSubscriptionVariables = {
-  owner?: string | null,
+  owner: string,
 };
 
 export type OnDeleteStarredEventSubscription = {
@@ -1557,11 +2017,6 @@ export type OnDeleteStarredEventSubscription = {
     __typename: "StarredEvent",
     id: string,
     owner?: string | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
-    createdAt: string,
-    updatedAt: string,
     Event?:  {
       __typename: "Event",
       id: string,
@@ -1577,6 +2032,11 @@ export type OnDeleteStarredEventSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1634,6 +2094,132 @@ export type OnDeleteEventSubscription = {
   } | null,
 };
 
+export type OnCreateMessageSubscription = {
+  onCreateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnUpdateMessageSubscription = {
+  onUpdateMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
+export type OnDeleteMessageSubscription = {
+  onDeleteMessage?:  {
+    __typename: "Message",
+    id: string,
+    owner?: string | null,
+    content: string,
+    event?:  {
+      __typename: "Event",
+      id: string,
+      title: string,
+      date: string,
+      description: string,
+      heart?: number | null,
+      thumbsup?: number | null,
+      happy?: number | null,
+      _version: number,
+      _deleted?: boolean | null,
+      _lastChangedAt: number,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    eventId?: string | null,
+    createdAt: string,
+    updatedAt: string,
+    original?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    thumbnail?:  {
+      __typename: "S3Object",
+      bucket: string,
+      key: string,
+      region: string,
+    } | null,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
+  } | null,
+};
+
 export type OnCreateLocationEventSubscription = {
   onCreateLocationEvent?:  {
     __typename: "LocationEvent",
@@ -1688,30 +2274,10 @@ export type OnDeleteLocationEventSubscription = {
   } | null,
 };
 
-export type OnCreateMessageSubscription = {
-  onCreateMessage?:  {
-    __typename: "Message",
+export type OnCreateRaceEventSubscription = {
+  onCreateRaceEvent?:  {
+    __typename: "RaceEvent",
     id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    original?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    thumbnail?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     event?:  {
       __typename: "Event",
       id: string,
@@ -1727,33 +2293,28 @@ export type OnCreateMessageSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
-export type OnUpdateMessageSubscription = {
-  onUpdateMessage?:  {
-    __typename: "Message",
+export type OnUpdateRaceEventSubscription = {
+  onUpdateRaceEvent?:  {
+    __typename: "RaceEvent",
     id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    original?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    thumbnail?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     event?:  {
       __typename: "Event",
       id: string,
@@ -1769,33 +2330,28 @@ export type OnUpdateMessageSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };
 
-export type OnDeleteMessageSubscription = {
-  onDeleteMessage?:  {
-    __typename: "Message",
+export type OnDeleteRaceEventSubscription = {
+  onDeleteRaceEvent?:  {
+    __typename: "RaceEvent",
     id: string,
-    owner?: string | null,
-    content: string,
-    eventId?: string | null,
-    createdAt: string,
-    updatedAt: string,
-    original?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    thumbnail?:  {
-      __typename: "S3Object",
-      bucket: string,
-      key: string,
-      region: string,
-    } | null,
-    _version: number,
-    _deleted?: boolean | null,
-    _lastChangedAt: number,
     event?:  {
       __typename: "Event",
       id: string,
@@ -1811,5 +2367,20 @@ export type OnDeleteMessageSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    eventId?: string | null,
+    type?: string | null,
+    competitor?: string | null,
+    lap?: number | null,
+    time?: string | null,
+    position?: number | null,
+    speed?: number | null,
+    gear?: number | null,
+    longitude?: number | null,
+    latitude?: number | null,
+    createdAt: string,
+    updatedAt: string,
+    _version: number,
+    _deleted?: boolean | null,
+    _lastChangedAt: number,
   } | null,
 };

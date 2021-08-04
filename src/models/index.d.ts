@@ -87,6 +87,10 @@ type EventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
+type RaceEventMetaData = {
+  readOnlyFields;
+}
+
 type StarredEventMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
@@ -121,6 +125,25 @@ export declare class Event {
   readonly updatedAt?: string;
   constructor(init: ModelInit<Event, EventMetaData>);
   static copyOf(source: Event, mutator: (draft: MutableModel<Event, EventMetaData>) => MutableModel<Event, EventMetaData> | void): Event;
+}
+
+export declare class RaceEvent {
+  readonly id: string;
+  readonly event?: Event;
+  readonly eventId?: string;
+  readonly type?: string;
+  readonly competitor?: string;
+  readonly lap?: number;
+  readonly time?: string;
+  readonly position?: number;
+  readonly speed?: number;
+  readonly gear?: number;
+  readonly longitude?: number;
+  readonly latitude?: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  constructor(init: ModelInit<RaceEvent>);
+  static copyOf(source: RaceEvent, mutator: (draft: MutableModel<RaceEvent>) => MutableModel<RaceEvent> | void): RaceEvent;
 }
 
 export declare class StarredEvent {

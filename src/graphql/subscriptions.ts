@@ -8,6 +8,20 @@ export const onMutateMessage = /* GraphQL */ `
       id
       owner
       content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       eventId
       createdAt
       updatedAt
@@ -24,6 +38,13 @@ export const onMutateMessage = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+    }
+  }
+`;
+export const onReceiveRaceEvent = /* GraphQL */ `
+  subscription OnReceiveRaceEvent($eventId: ID) {
+    onReceiveRaceEvent(eventId: $eventId) {
+      id
       event {
         id
         title
@@ -38,19 +59,29 @@ export const onMutateMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
 export const onCreateStarredEvent = /* GraphQL */ `
-  subscription OnCreateStarredEvent($owner: String) {
+  subscription OnCreateStarredEvent($owner: String!) {
     onCreateStarredEvent(owner: $owner) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -65,19 +96,19 @@ export const onCreateStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
 export const onUpdateStarredEvent = /* GraphQL */ `
-  subscription OnUpdateStarredEvent($owner: String) {
+  subscription OnUpdateStarredEvent($owner: String!) {
     onUpdateStarredEvent(owner: $owner) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -92,19 +123,19 @@ export const onUpdateStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
 export const onDeleteStarredEvent = /* GraphQL */ `
-  subscription OnDeleteStarredEvent($owner: String) {
+  subscription OnDeleteStarredEvent($owner: String!) {
     onDeleteStarredEvent(owner: $owner) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -119,6 +150,11 @@ export const onDeleteStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -176,6 +212,123 @@ export const onDeleteEvent = /* GraphQL */ `
     }
   }
 `;
+export const onCreateMessage = /* GraphQL */ `
+  subscription OnCreateMessage {
+    onCreateMessage {
+      id
+      owner
+      content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateMessage = /* GraphQL */ `
+  subscription OnUpdateMessage {
+    onUpdateMessage {
+      id
+      owner
+      content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteMessage = /* GraphQL */ `
+  subscription OnDeleteMessage {
+    onDeleteMessage {
+      id
+      owner
+      content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateLocationEvent = /* GraphQL */ `
   subscription OnCreateLocationEvent {
     onCreateLocationEvent {
@@ -230,28 +383,10 @@ export const onDeleteLocationEvent = /* GraphQL */ `
     }
   }
 `;
-export const onCreateMessage = /* GraphQL */ `
-  subscription OnCreateMessage {
-    onCreateMessage {
+export const onCreateRaceEvent = /* GraphQL */ `
+  subscription OnCreateRaceEvent {
+    onCreateRaceEvent {
       id
-      owner
-      content
-      eventId
-      createdAt
-      updatedAt
-      original {
-        bucket
-        key
-        region
-      }
-      thumbnail {
-        bucket
-        key
-        region
-      }
-      _version
-      _deleted
-      _lastChangedAt
       event {
         id
         title
@@ -266,31 +401,28 @@ export const onCreateMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
-export const onUpdateMessage = /* GraphQL */ `
-  subscription OnUpdateMessage {
-    onUpdateMessage {
+export const onUpdateRaceEvent = /* GraphQL */ `
+  subscription OnUpdateRaceEvent {
+    onUpdateRaceEvent {
       id
-      owner
-      content
-      eventId
-      createdAt
-      updatedAt
-      original {
-        bucket
-        key
-        region
-      }
-      thumbnail {
-        bucket
-        key
-        region
-      }
-      _version
-      _deleted
-      _lastChangedAt
       event {
         id
         title
@@ -305,31 +437,28 @@ export const onUpdateMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
-export const onDeleteMessage = /* GraphQL */ `
-  subscription OnDeleteMessage {
-    onDeleteMessage {
+export const onDeleteRaceEvent = /* GraphQL */ `
+  subscription OnDeleteRaceEvent {
+    onDeleteRaceEvent {
       id
-      owner
-      content
-      eventId
-      createdAt
-      updatedAt
-      original {
-        bucket
-        key
-        region
-      }
-      thumbnail {
-        bucket
-        key
-        region
-      }
-      _version
-      _deleted
-      _lastChangedAt
       event {
         id
         title
@@ -344,6 +473,21 @@ export const onDeleteMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

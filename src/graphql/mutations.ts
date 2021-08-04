@@ -10,11 +10,6 @@ export const createStarredEvent = /* GraphQL */ `
     createStarredEvent(input: $input, condition: $condition) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -29,6 +24,11 @@ export const createStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -40,11 +40,6 @@ export const updateStarredEvent = /* GraphQL */ `
     updateStarredEvent(input: $input, condition: $condition) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -59,6 +54,11 @@ export const updateStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -70,11 +70,6 @@ export const deleteStarredEvent = /* GraphQL */ `
     deleteStarredEvent(input: $input, condition: $condition) {
       id
       owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       Event {
         id
         title
@@ -89,6 +84,11 @@ export const deleteStarredEvent = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -155,27 +155,6 @@ export const deleteEvent = /* GraphQL */ `
     }
   }
 `;
-export const createLocationEvent = /* GraphQL */ `
-  mutation CreateLocationEvent(
-    $input: CreateLocationEventInput!
-    $condition: ModelLocationEventConditionInput
-  ) {
-    createLocationEvent(input: $input, condition: $condition) {
-      id
-      type
-      geofenceId
-      deviceId
-      sampleTime
-      longitude
-      latitude
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const updateLocationEvent = /* GraphQL */ `
   mutation UpdateLocationEvent(
     $input: UpdateLocationEventInput!
@@ -227,6 +206,20 @@ export const createMessage = /* GraphQL */ `
       id
       owner
       content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       eventId
       createdAt
       updatedAt
@@ -243,62 +236,6 @@ export const createMessage = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
-      event {
-        id
-        title
-        date
-        description
-        heart
-        thumbsup
-        happy
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const updateMessage = /* GraphQL */ `
-  mutation UpdateMessage(
-    $input: UpdateMessageInput!
-    $condition: ModelMessageConditionInput
-  ) {
-    updateMessage(input: $input, condition: $condition) {
-      id
-      owner
-      content
-      eventId
-      createdAt
-      updatedAt
-      original {
-        bucket
-        key
-        region
-      }
-      thumbnail {
-        bucket
-        key
-        region
-      }
-      _version
-      _deleted
-      _lastChangedAt
-      event {
-        id
-        title
-        date
-        description
-        heart
-        thumbsup
-        happy
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
     }
   }
 `;
@@ -311,6 +248,20 @@ export const deleteMessage = /* GraphQL */ `
       id
       owner
       content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
       eventId
       createdAt
       updatedAt
@@ -327,6 +278,16 @@ export const deleteMessage = /* GraphQL */ `
       _version
       _deleted
       _lastChangedAt
+    }
+  }
+`;
+export const updateRaceEvent = /* GraphQL */ `
+  mutation UpdateRaceEvent(
+    $input: UpdateRaceEventInput!
+    $condition: ModelRaceEventConditionInput
+  ) {
+    updateRaceEvent(input: $input, condition: $condition) {
+      id
       event {
         id
         title
@@ -341,6 +302,162 @@ export const deleteMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteRaceEvent = /* GraphQL */ `
+  mutation DeleteRaceEvent(
+    $input: DeleteRaceEventInput!
+    $condition: ModelRaceEventConditionInput
+  ) {
+    deleteRaceEvent(input: $input, condition: $condition) {
+      id
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createLocationEvent = /* GraphQL */ `
+  mutation CreateLocationEvent(
+    $input: CreateLocationEventInput!
+    $condition: ModelLocationEventConditionInput
+  ) {
+    createLocationEvent(input: $input, condition: $condition) {
+      id
+      type
+      geofenceId
+      deviceId
+      sampleTime
+      longitude
+      latitude
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateMessage = /* GraphQL */ `
+  mutation UpdateMessage(
+    $input: UpdateMessageInput!
+    $condition: ModelMessageConditionInput
+  ) {
+    updateMessage(input: $input, condition: $condition) {
+      id
+      owner
+      content
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createRaceEvent = /* GraphQL */ `
+  mutation CreateRaceEvent(
+    $input: CreateRaceEventInput!
+    $condition: ModelRaceEventConditionInput
+  ) {
+    createRaceEvent(input: $input, condition: $condition) {
+      id
+      event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;

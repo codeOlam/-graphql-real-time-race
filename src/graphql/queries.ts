@@ -105,68 +105,6 @@ export const getResults2 = /* GraphQL */ `
     }
   }
 `;
-export const getStarredEvent = /* GraphQL */ `
-  query GetStarredEvent($id: ID!) {
-    getStarredEvent(id: $id) {
-      id
-      owner
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-      Event {
-        id
-        title
-        date
-        description
-        heart
-        thumbsup
-        happy
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-      }
-    }
-  }
-`;
-export const listStarredEvents = /* GraphQL */ `
-  query ListStarredEvents(
-    $filter: ModelStarredEventFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listStarredEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        owner
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
-        Event {
-          id
-          title
-          date
-          description
-          heart
-          thumbsup
-          happy
-          _version
-          _deleted
-          _lastChangedAt
-          createdAt
-          updatedAt
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const syncStarredEvents = /* GraphQL */ `
   query SyncStarredEvents(
     $filter: ModelStarredEventFilterInput
@@ -183,11 +121,6 @@ export const syncStarredEvents = /* GraphQL */ `
       items {
         id
         owner
-        _version
-        _deleted
-        _lastChangedAt
-        createdAt
-        updatedAt
         Event {
           id
           title
@@ -202,6 +135,105 @@ export const syncStarredEvents = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getStarredEvent = /* GraphQL */ `
+  query GetStarredEvent($id: ID!) {
+    getStarredEvent(id: $id) {
+      id
+      owner
+      Event {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listStarredEvents = /* GraphQL */ `
+  query ListStarredEvents(
+    $filter: ModelStarredEventFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listStarredEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        Event {
+          id
+          title
+          date
+          description
+          heart
+          thumbsup
+          happy
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncEvents = /* GraphQL */ `
+  query SyncEvents(
+    $filter: ModelEventFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncEvents(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        title
+        date
+        description
+        heart
+        thumbsup
+        happy
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
       }
       nextToken
       startedAt
@@ -252,20 +284,66 @@ export const listEvents = /* GraphQL */ `
     }
   }
 `;
-export const syncEvents = /* GraphQL */ `
-  query SyncEvents(
-    $filter: ModelEventFilterInput
+export const syncMessages = /* GraphQL */ `
+  query SyncMessages(
+    $filter: ModelMessageFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncEvents(
+    syncMessages(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       lastSync: $lastSync
     ) {
       items {
+        id
+        owner
+        content
+        event {
+          id
+          title
+          date
+          description
+          heart
+          thumbsup
+          happy
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        eventId
+        createdAt
+        updatedAt
+        original {
+          bucket
+          key
+          region
+        }
+        thumbnail {
+          bucket
+          key
+          region
+        }
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getMessage = /* GraphQL */ `
+  query GetMessage($id: ID!) {
+    getMessage(id: $id) {
+      id
+      owner
+      content
+      event {
         id
         title
         date
@@ -278,6 +356,124 @@ export const syncEvents = /* GraphQL */ `
         _lastChangedAt
         createdAt
         updatedAt
+      }
+      eventId
+      createdAt
+      updatedAt
+      original {
+        bucket
+        key
+        region
+      }
+      thumbnail {
+        bucket
+        key
+        region
+      }
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listMessages = /* GraphQL */ `
+  query ListMessages(
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        owner
+        content
+        event {
+          id
+          title
+          date
+          description
+          heart
+          thumbsup
+          happy
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        eventId
+        createdAt
+        updatedAt
+        original {
+          bucket
+          key
+          region
+        }
+        thumbnail {
+          bucket
+          key
+          region
+        }
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const messagesByEventId = /* GraphQL */ `
+  query MessagesByEventId(
+    $eventId: ID
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelMessageFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    messagesByEventId(
+      eventId: $eventId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        owner
+        content
+        event {
+          id
+          title
+          date
+          description
+          heart
+          thumbsup
+          happy
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+        }
+        eventId
+        createdAt
+        updatedAt
+        original {
+          bucket
+          key
+          region
+        }
+        thumbnail {
+          bucket
+          key
+          region
+        }
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
@@ -360,28 +556,10 @@ export const syncLocationEvents = /* GraphQL */ `
     }
   }
 `;
-export const getMessage = /* GraphQL */ `
-  query GetMessage($id: ID!) {
-    getMessage(id: $id) {
+export const getRaceEvent = /* GraphQL */ `
+  query GetRaceEvent($id: ID!) {
+    getRaceEvent(id: $id) {
       id
-      owner
-      content
-      eventId
-      createdAt
-      updatedAt
-      original {
-        bucket
-        key
-        region
-      }
-      thumbnail {
-        bucket
-        key
-        region
-      }
-      _version
-      _deleted
-      _lastChangedAt
       event {
         id
         title
@@ -396,36 +574,33 @@ export const getMessage = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      eventId
+      type
+      competitor
+      lap
+      time
+      position
+      speed
+      gear
+      longitude
+      latitude
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
-export const listMessages = /* GraphQL */ `
-  query ListMessages(
-    $filter: ModelMessageFilterInput
+export const listRaceEvents = /* GraphQL */ `
+  query ListRaceEvents(
+    $filter: ModelRaceEventFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMessages(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listRaceEvents(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        owner
-        content
-        eventId
-        createdAt
-        updatedAt
-        original {
-          bucket
-          key
-          region
-        }
-        thumbnail {
-          bucket
-          key
-          region
-        }
-        _version
-        _deleted
-        _lastChangedAt
         event {
           id
           title
@@ -440,22 +615,37 @@ export const listMessages = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventId
+        type
+        competitor
+        lap
+        time
+        position
+        speed
+        gear
+        longitude
+        latitude
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
     }
   }
 `;
-export const messagesByEventId = /* GraphQL */ `
-  query MessagesByEventId(
+export const raceEventsByEventId = /* GraphQL */ `
+  query RaceEventsByEventId(
     $eventId: ID
     $createdAt: ModelStringKeyConditionInput
     $sortDirection: ModelSortDirection
-    $filter: ModelMessageFilterInput
+    $filter: ModelRaceEventFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    messagesByEventId(
+    raceEventsByEventId(
       eventId: $eventId
       createdAt: $createdAt
       sortDirection: $sortDirection
@@ -465,24 +655,6 @@ export const messagesByEventId = /* GraphQL */ `
     ) {
       items {
         id
-        owner
-        content
-        eventId
-        createdAt
-        updatedAt
-        original {
-          bucket
-          key
-          region
-        }
-        thumbnail {
-          bucket
-          key
-          region
-        }
-        _version
-        _deleted
-        _lastChangedAt
         event {
           id
           title
@@ -497,20 +669,35 @@ export const messagesByEventId = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventId
+        type
+        competitor
+        lap
+        time
+        position
+        speed
+        gear
+        longitude
+        latitude
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
     }
   }
 `;
-export const syncMessages = /* GraphQL */ `
-  query SyncMessages(
-    $filter: ModelMessageFilterInput
+export const syncRaceEvents = /* GraphQL */ `
+  query SyncRaceEvents(
+    $filter: ModelRaceEventFilterInput
     $limit: Int
     $nextToken: String
     $lastSync: AWSTimestamp
   ) {
-    syncMessages(
+    syncRaceEvents(
       filter: $filter
       limit: $limit
       nextToken: $nextToken
@@ -518,24 +705,6 @@ export const syncMessages = /* GraphQL */ `
     ) {
       items {
         id
-        owner
-        content
-        eventId
-        createdAt
-        updatedAt
-        original {
-          bucket
-          key
-          region
-        }
-        thumbnail {
-          bucket
-          key
-          region
-        }
-        _version
-        _deleted
-        _lastChangedAt
         event {
           id
           title
@@ -550,6 +719,21 @@ export const syncMessages = /* GraphQL */ `
           createdAt
           updatedAt
         }
+        eventId
+        type
+        competitor
+        lap
+        time
+        position
+        speed
+        gear
+        longitude
+        latitude
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
       }
       nextToken
       startedAt
