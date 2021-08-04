@@ -1,0 +1,112 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: AWS StepFunctions for ingestion of RealTime Race Update
+Metadata: {}
+
+Parameters:
+  env:
+    Type: String
+    Description: The environment name. e.g. Dev, Test, or Production
+    Default: NONE
+  WaitIntervalInSec:
+    Type: Number
+    Description: periodically call race lap events (1 to 600) seconds
+    MinValue: 1
+    MaxValue: 600
+    Default: 1
+  functionsimulateRaceEventsName:
+    Type: String
+  functionsimulateRaceEventsArn:
+    Type: String
+
+Resources:
+  ProcessWorkflowExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      Path: /
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Action: "sts:AssumeRole"
+            Principal:
+              Service:
+                - !Sub states.${AWS::Region}.amazonaws.com
+      Policies:
+        - PolicyName: !Sub "GraphQL-race-${env}-statemachine-service-role"
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: "Allow"
+                Action: "lambda:InvokeFunction"
+                Resource: !Ref functionsimulateRaceEventsArn
+  ProcessWorkflowStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: !Sub "GraphQL-race-processWorkflow-${env}"
+      RoleArn: !GetAtt ProcessWorkflowExecutionRole.Arn
+      DefinitionString: !Sub
+        - |-
+          {
+            "Comment": "Workflow that runs a polling job of a race data and monitors the job until it completes.",
+            "StartAt": "WaitForDueDate",
+            "States": {
+              "WaitForDueDate": {
+                "Type": "Wait",
+                "TimestampPath": "$.planned_race_start",
+                "Next": "Get Race Lap Data"
+              },
+              "Wait X Seconds": {
+                "Type": "Wait",
+                "Seconds": 1,
+                "Next": "Get Race Lap Data"
+              },
+              "Get Race Lap Data": {
+                "Type": "Task",
+                "Resource": "${x1}",
+                "Next": "Race Complete?",
+                "InputPath": "$",
+                "ResultPath": "$.status",
+                "Retry": [
+                  {
+                    "ErrorEquals": ["States.ALL"],
+                    "IntervalSeconds": 1,
+                    "MaxAttempts": 3,
+                    "BackoffRate": 2
+                  }
+                ]
+              },
+              "Race Complete?": {
+                "Type": "Choice",
+                "Choices": [
+                  {
+                    "Variable": "$.status",
+                    "StringEquals": "error",
+                    "Next": "Race Failed"
+                  },
+                  {
+                    "Variable": "$.status",
+                    "StringEquals": "completed",
+                    "Next": "Race Ended"
+                  }
+                ],
+                "Default": "Wait X Seconds"
+              },
+              "Race Failed": {
+                "Type": "Fail",
+                "Cause": "Race Data Ingestion Failed",
+                "Error": "Get Race Lap Data returned FAILED"
+              },
+              "Race Ended": {
+                "Type": "Succeed"
+              }
+            }
+          }
+        - { x0: !Ref WaitIntervalInSec, x1: !Ref functionsimulateRaceEventsArn }
+Outputs:
+  ProcessWorkflowExecutionRole:
+    Value:
+      Ref: ProcessWorkflowExecutionRole
+
+  Arn:
+    Value:
+      Ref: ProcessWorkflowStateMachine

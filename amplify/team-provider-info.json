@@ -41,6 +41,14 @@
         "pinpointInterface": {
           "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
           "s3Key": "amplify-builds/pinpointInterface-663247726d6857717753-build.zip"
+        },
+        "processLiveEvents": {
+          "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
+          "s3Key": "amplify-builds/processLiveEvents-76326b41476970554756-build.zip"
+        },
+        "simulateRaceEvents": {
+          "deploymentBucketName": "amplify-graphqlrealtimerace-staging-214014-deployment",
+          "s3Key": "amplify-builds/simulateRaceEvents-7943425239424f745055-build.zip"
         }
       }
     }

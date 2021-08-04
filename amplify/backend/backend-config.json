@@ -183,6 +183,21 @@
           ]
         }
       ]
+    },
+    "raceSimulationScheduler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "api",
+          "resourceName": "graphqlrealtimerace",
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput"
+          ]
+        }
+      ]
     }
   },
   "analytics": {
@@ -193,6 +208,22 @@
     "graphqlrealtimeraceKinesis": {
       "service": "Kinesis",
       "providerPlugin": "awscloudformation"
+    }
+  },
+  "stepFunction": {
+    "processWorkflow": {
+      "service": "Step Function",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "simulateRaceEvents",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
     }
   }
 }

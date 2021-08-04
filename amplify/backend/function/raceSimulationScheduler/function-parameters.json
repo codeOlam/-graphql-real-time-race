@@ -1,0 +1,8 @@
+{
+  "stepFunctionprocessWorkflowArn": {
+  "Fn::GetAtt": [
+    "stepFunctionprocessWorkflow",
+    "Outputs.Arn"
+  ]
+}
+}
